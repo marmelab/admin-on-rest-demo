@@ -1,0 +1,31 @@
+{
+  "name": "admin-on-rest-demo",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "admin-on-rest": "^0.5.2",
+    "babel-eslint": "^7.1.1",
+    "babel-polyfill": "^6.16.0",
+    "eslint": "^3.10.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-config-airbnb-base": "^10.0.1",
+    "eslint-import-resolver-node": "^0.2.3",
+    "eslint-module-utils": "^2.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.7.1",
+    "fakerest": "^1.2.1",
+    "fetch-mock": "^5.5.0",
+    "react-scripts": "0.7.0"
+  },
+  "dependencies": {
+    "react": "~15.4.0",
+    "react-dom": "~15.4.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

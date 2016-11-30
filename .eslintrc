@@ -1,0 +1,18 @@
+{
+    "env": {
+        "browser": true,
+        "mocha": true,
+        "node": true,
+        "phantomjs": true,
+        "protractor": true,
+    },
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "rules": {
+        "indent": ["warn", 4],
+        "max-len": ["off"],
+        "react/jsx-indent": ["warn", 4],
+        "react/jsx-indent-props": ["warn", 4],
+        "react/jsx-filename-extension": ["off"]
+    },
+}
