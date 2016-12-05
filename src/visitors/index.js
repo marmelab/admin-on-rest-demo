@@ -82,7 +82,7 @@ export const VisitorList = (props) => (
 );
 
 export const VisitorCreate = (props) => (
-    <Create>
+    <Create {...props}>
         <TextInput source="first_name" />
         <TextInput source="last_name" />
     </Create>
