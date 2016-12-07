@@ -7,7 +7,8 @@ import { Delete } from 'admin-on-rest/lib/mui';
 
 import './App.css';
 import data from './data';
-import { VisitorList, VisitorCreate, VisitorEdit, VisitorIcon } from './visitors';
+import { VisitorList, VisitorEdit, VisitorIcon } from './visitors';
+import { CommandList, CommandEdit, CommandIcon } from './commands';
 
 class App extends Component {
     componentWillMount() {
@@ -22,12 +23,10 @@ class App extends Component {
     }
 
     render() {
-        const restClient = simpleRestClient('http://localhost:3000');
-        const delayedRestClient = (type, resource, params) => new Promise(resolve => setTimeout(() => resolve(restClient(type, resource, params)), 1000));
-
         return (
-            <Admin restClient={delayedRestClient} title="Example Admin">
-                <Resource name="customers" list={VisitorList} create={VisitorCreate} edit={VisitorEdit} remove={Delete} icon={VisitorIcon} />
+            <Admin restClient={simpleRestClient('http://localhost:3000')} title="Posters Galore Admin">
+                <Resource name="customers" list={VisitorList} edit={VisitorEdit} remove={Delete} icon={VisitorIcon} />
+                <Resource name="commands" list={CommandList} edit={CommandEdit} remove={Delete} icon={CommandIcon} />
             </Admin>
         );
     }

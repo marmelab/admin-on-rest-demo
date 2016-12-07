@@ -1,50 +1,37 @@
 import React from 'react';
 import {
-    Create,
+    AmountField,
+    BooleanField,
     ChipField,
     Datagrid,
     DateField,
     DateInput,
-    DisabledInput,
     Edit,
     EditButton,
     Filter,
     List,
     LongTextInput,
+    NullableBooleanInput,
     ReferenceManyField,
-    Show,
     TextField,
     TextInput,
-    RichTextField,
-    RichTextInput,
 } from 'admin-on-rest/lib/mui';
 
-import Icon from 'material-ui/svg-icons/action/book';
-import CheckIcon from 'material-ui/svg-icons/action/check-circle';
+import Icon from 'material-ui/svg-icons/social/person';
+
+import FullNameField from './FullNameField';
+import NbItemsField from '../commands/NbItemsField';
 
 export const VisitorIcon = Icon;
 
 const VisitorFilter = (props) => (
     <Filter {...props}>
         <TextInput label="Search" source="q" alwaysOn />
+        <DateInput label="Visited Since" source="last_seen_gte" />
+        <NullableBooleanInput source="has_ordered" />
+        <NullableBooleanInput source="has_newsletter" />
     </Filter>
 );
-
-const AvatarField = ({record}) => <img src={`${record.avatar}?size=25x25`} width="25" role="presentation" />;
-AvatarField.defaultProps = {
-    cellStyle: { 'td:first-child': { padding: '0 0 0 12px' } },
-};
-
-const FullNameField = ({ record = {} }) => <span>{record.first_name} {record.last_name}</span>;
-FullNameField.defaultProps = { label: 'Name'};
-
-const AmountField = ({ record = {}, source, currency = '$' }) => record[source] ?
-    <span>{currency}{record[source].toFixed(2)}</span> :
-    null;
-AmountField.defaultProps = {
-    cellStyle: { td: { textAlign: 'right' } },
-    headerStyle: { th: { textAlign: 'right' } },
-};
 
 const colored = WrappedComponent => props => props.record[props.source] > 500 ?
     <span style={{ color: 'red' }}><WrappedComponent {...props} /></span> :
@@ -52,8 +39,6 @@ const colored = WrappedComponent => props => props.record[props.source] > 500 ?
 
 const ColoredAmountField = colored(AmountField);
 ColoredAmountField.defaultProps = AmountField.defaultProps;
-
-const CheckedField = ({ record, source }) => record[source] ? <CheckIcon /> : null;
 
 const ArrayField = ({ record, source, Renderer = ChipField }) => (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -66,26 +51,18 @@ const rowStyle = (record, index) => ({
 })
 
 export const VisitorList = (props) => (
-    <List {...props} filter={VisitorFilter} defaultSort={{ field: 'last_seen', order: 'DESC' }}>
+    <List {...props} filter={<VisitorFilter />} defaultSort={{ field: 'last_seen', order: 'DESC' }} perPage={25}>
         <Datagrid rowStyle={rowStyle}>
-            <AvatarField />
-            <FullNameField source="last_name" />
+            <FullNameField />
             <DateField source="last_seen" type="date" />
             <TextField source="nb_commands" label="Commands" style={{ color: 'purple' }} />
             <ColoredAmountField source="total_spent" />
             <DateField source="latest_purchase" showTime />
-            <CheckedField source="has_newsletter" label="News." />
+            <BooleanField source="has_newsletter" label="News." />
             <ArrayField source="groups" label="Segments" />
             <EditButton />
         </Datagrid>
     </List>
-);
-
-export const VisitorCreate = (props) => (
-    <Create {...props}>
-        <TextInput source="first_name" />
-        <TextInput source="last_name" />
-    </Create>
 );
 
 const VisitorTitle = ({ record }) => <span>
@@ -94,8 +71,27 @@ const VisitorTitle = ({ record }) => <span>
 </span>;
 
 export const VisitorEdit = (props) => (
-    <Edit title={VisitorTitle} {...props}>
+    <Edit title={<VisitorTitle />} {...props}>
         <TextInput source="first_name" />
         <TextInput source="last_name" />
+        <TextInput type="email" source="email" validation={{ email: true }}/>
+        <LongTextInput source="address" />
+        <TextInput source="zipcode" />
+        <TextInput source="city" />
+        <DateInput source="birthday" />
+        <NullableBooleanInput source="has_newsletter" />
+        <DateField source="first_seen" />
+        <DateField source="latest_purchase" />
+        <DateField source="last_seen" />
+        <ReferenceManyField label="Latest commands" reference="commands" target="customer_id">
+            <Datagrid>
+                <DateField source="date" />
+                <TextField source="reference" />
+                <NbItemsField />
+                <AmountField source="total" />
+                <TextField source="status" />
+                <EditButton />
+            </Datagrid>
+        </ReferenceManyField>
     </Edit>
 );
