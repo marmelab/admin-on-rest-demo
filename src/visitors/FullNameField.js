@@ -7,7 +7,6 @@ const FullNameField = ({ record = {} }) => <span>
 </span>;
 
 FullNameField.defaultProps = {
-    cellStyle: { 'td:first-child': { padding: '0 0 0 12px' } },
     source: 'last_name',
     label: 'Name',
 };

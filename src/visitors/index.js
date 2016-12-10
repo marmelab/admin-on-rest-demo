@@ -12,6 +12,7 @@ import {
     List,
     LongTextInput,
     NullableBooleanInput,
+    NumberField,
     ReferenceManyField,
     TextField,
     TextInput,
@@ -55,7 +56,7 @@ export const VisitorList = (props) => (
         <Datagrid rowStyle={rowStyle}>
             <FullNameField />
             <DateField source="last_seen" type="date" />
-            <TextField source="nb_commands" label="Commands" style={{ color: 'purple' }} />
+            <NumberField source="nb_commands" label="Commands" style={{ color: 'purple' }} />
             <ColoredAmountField source="total_spent" />
             <DateField source="latest_purchase" showTime />
             <BooleanField source="has_newsletter" label="News." />
@@ -72,17 +73,17 @@ const VisitorTitle = ({ record }) => <span>
 
 export const VisitorEdit = (props) => (
     <Edit title={<VisitorTitle />} {...props}>
-        <TextInput source="first_name" />
-        <TextInput source="last_name" />
-        <TextInput type="email" source="email" validation={{ email: true }}/>
-        <LongTextInput source="address" />
-        <TextInput source="zipcode" />
-        <TextInput source="city" />
+        <TextInput source="first_name" style={{ display: 'inline-block' }} />
+        <TextInput source="last_name" style={{ display: 'inline-block', marginLeft: 32 }} />
+        <TextInput type="email" source="email" validation={{ email: true }} style={{ width: 544 }} />
+        <LongTextInput source="address" style={{ maxWidth: 544 }} />
+        <TextInput source="zipcode" style={{ display: 'inline-block' }} />
+        <TextInput source="city" style={{ display: 'inline-block', marginLeft: 32 }} />
         <DateInput source="birthday" />
         <NullableBooleanInput source="has_newsletter" />
-        <DateField source="first_seen" />
-        <DateField source="latest_purchase" />
-        <DateField source="last_seen" />
+        <DateField source="first_seen" style={{ width: 128, display: 'inline-block' }} />
+        <DateField source="latest_purchase" style={{ width: 128, display: 'inline-block' }} />
+        <DateField source="last_seen" style={{ width: 128, display: 'inline-block' }} />
         <ReferenceManyField label="Latest commands" reference="commands" target="customer_id">
             <Datagrid>
                 <DateField source="date" />
