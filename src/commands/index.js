@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    AmountField,
     BooleanField,
     Datagrid,
     DateField,
@@ -10,6 +9,7 @@ import {
     Filter,
     List,
     NullableBooleanInput,
+    NumberField,
     ReferenceField,
     ReferenceInput,
     SelectInput,
@@ -46,7 +46,7 @@ export const CommandList = (props) => (
                 <FullNameField />
             </ReferenceField>
             <NbItemsField />
-            <AmountField source="total" />
+            <NumberField source="total" options={{ style: 'currency', currency: 'USD' }} />
             <TextField source="status" />
             <BooleanField source="returned" />
             <EditButton />

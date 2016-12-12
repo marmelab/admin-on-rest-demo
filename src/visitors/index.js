@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    AmountField,
     BooleanField,
     ChipField,
     Datagrid,
@@ -38,8 +37,8 @@ const colored = WrappedComponent => props => props.record[props.source] > 500 ?
     <span style={{ color: 'red' }}><WrappedComponent {...props} /></span> :
     <WrappedComponent {...props} />;
 
-const ColoredAmountField = colored(AmountField);
-ColoredAmountField.defaultProps = AmountField.defaultProps;
+const ColoredNumberField = colored(NumberField);
+ColoredNumberField.defaultProps = NumberField.defaultProps;
 
 const ArrayField = ({ record, source, Renderer = ChipField }) => (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -57,7 +56,7 @@ export const VisitorList = (props) => (
             <FullNameField />
             <DateField source="last_seen" type="date" />
             <NumberField source="nb_commands" label="Commands" style={{ color: 'purple' }} />
-            <ColoredAmountField source="total_spent" />
+            <ColoredNumberField source="total_spent" options={{ style: 'currency', currency: 'USD' }} />
             <DateField source="latest_purchase" showTime />
             <BooleanField source="has_newsletter" label="News." />
             <ArrayField source="groups" label="Segments" />
@@ -89,7 +88,7 @@ export const VisitorEdit = (props) => (
                 <DateField source="date" />
                 <TextField source="reference" />
                 <NbItemsField />
-                <AmountField source="total" />
+                <NumberField source="total" options={{ style: 'currency', currency: 'USD' }} />
                 <TextField source="status" />
                 <EditButton />
             </Datagrid>
