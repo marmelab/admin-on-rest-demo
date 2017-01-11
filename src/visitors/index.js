@@ -8,11 +8,13 @@ import {
     Edit,
     EditButton,
     Filter,
+    FormTab,
     List,
     LongTextInput,
     NullableBooleanInput,
     NumberField,
     ReferenceManyField,
+    TabbedForm,
     TextField,
     TextInput,
 } from 'admin-on-rest/lib/mui';
@@ -72,26 +74,36 @@ const VisitorTitle = ({ record }) => <span>
 
 export const VisitorEdit = (props) => (
     <Edit title={<VisitorTitle />} {...props}>
-        <TextInput source="first_name" style={{ display: 'inline-block' }} />
-        <TextInput source="last_name" style={{ display: 'inline-block', marginLeft: 32 }} />
-        <TextInput type="email" source="email" validation={{ email: true }} style={{ width: 544 }} />
-        <LongTextInput source="address" style={{ maxWidth: 544 }} />
-        <TextInput source="zipcode" style={{ display: 'inline-block' }} />
-        <TextInput source="city" style={{ display: 'inline-block', marginLeft: 32 }} />
-        <DateInput source="birthday" />
-        <NullableBooleanInput source="has_newsletter" />
-        <DateField source="first_seen" style={{ width: 128, display: 'inline-block' }} />
-        <DateField source="latest_purchase" style={{ width: 128, display: 'inline-block' }} />
-        <DateField source="last_seen" style={{ width: 128, display: 'inline-block' }} />
-        <ReferenceManyField label="Latest commands" reference="commands" target="customer_id">
-            <Datagrid>
-                <DateField source="date" />
-                <TextField source="reference" />
-                <NbItemsField />
-                <NumberField source="total" options={{ style: 'currency', currency: 'USD' }} />
-                <TextField source="status" />
-                <EditButton />
-            </Datagrid>
-        </ReferenceManyField>
+        <TabbedForm>
+            <FormTab label="Identity">
+                <TextInput source="first_name" style={{ display: 'inline-block' }} />
+                <TextInput source="last_name" style={{ display: 'inline-block', marginLeft: 32 }} />
+                <TextInput type="email" source="email" validation={{ email: true }} style={{ width: 544 }} />
+                <DateInput source="birthday" />
+            </FormTab>
+            <FormTab label="Address">
+                <LongTextInput source="address" label="Street" style={{ maxWidth: 544 }} />
+                <TextInput source="zipcode" style={{ display: 'inline-block' }} />
+                <TextInput source="city" style={{ display: 'inline-block', marginLeft: 32 }} />
+            </FormTab>
+            <FormTab label="Commands">
+                <ReferenceManyField addLabel={false} reference="commands" target="customer_id">
+                    <Datagrid>
+                        <DateField source="date" />
+                        <TextField source="reference" />
+                        <NbItemsField />
+                        <NumberField source="total" options={{ style: 'currency', currency: 'USD' }} />
+                        <TextField source="status" />
+                        <EditButton />
+                    </Datagrid>
+                </ReferenceManyField>
+            </FormTab>
+            <FormTab label="Stats">
+                <NullableBooleanInput source="has_newsletter" />
+                <DateField source="first_seen" style={{ width: 128, display: 'inline-block' }} />
+                <DateField source="latest_purchase" style={{ width: 128, display: 'inline-block' }} />
+                <DateField source="last_seen" style={{ width: 128, display: 'inline-block' }} />
+            </FormTab>
+        </TabbedForm>
     </Edit>
 );

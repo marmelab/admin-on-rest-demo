@@ -15,6 +15,7 @@ import {
     ReferenceField,
     ReferenceInput,
     SelectInput,
+    SimpleForm,
     TextField,
     TextInput,
 } from 'admin-on-rest/lib/mui';
@@ -59,17 +60,19 @@ export const CommandList = (props) => (
 const CommandTitle = ({ record }) => <span>Command #{record.reference}</span>;
 export const CommandEdit = (props) => (
     <Edit title={<CommandTitle />} {...props}>
-        <Basket />
-        <DateInput source="date" />
-        <ReferenceInput label="Customer" source="customer_id" reference="customers">
-            <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
-        </ReferenceInput>
-        <SelectInput source="status" choices={[
-            { id: 'delivered', name: 'delivered' },
-            { id: 'ordered', name: 'ordered' },
-            { id: 'cancelled', name: 'cancelled' },
-        ]}/>
-        <BooleanInput source="returned" />
-        <div style={{ clear: 'both' }} />
+        <SimpleForm>
+            <Basket />
+            <DateInput source="date" />
+            <ReferenceInput label="Customer" source="customer_id" reference="customers">
+                <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
+            </ReferenceInput>
+            <SelectInput source="status" choices={[
+                { id: 'delivered', name: 'delivered' },
+                { id: 'ordered', name: 'ordered' },
+                { id: 'cancelled', name: 'cancelled' },
+            ]}/>
+            <BooleanInput source="returned" />
+            <div style={{ clear: 'both' }} />
+        </SimpleForm>
     </Edit>
 );

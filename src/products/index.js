@@ -6,6 +6,7 @@ import {
     List,
     NumberField,
     NumberInput,
+    SimpleForm,
     TextField,
     TextInput,
 } from 'admin-on-rest/lib/mui';
@@ -26,9 +27,11 @@ export const ProductList = (props) => (
 
 export const ProductEdit = (props) => (
     <Edit {...props}>
-        <TextInput source="reference" />
-        <NumberInput source="price" />
-        <NumberInput source="width" style={{ display: 'inline-block' }} />
-        <NumberInput source="height" style={{ display: 'inline-block', marginLeft: 32 }} />
+        <SimpleForm>
+            <TextInput source="reference" />
+            <NumberInput source="price" />
+            <NumberInput source="width" style={{ display: 'inline-block' }} />
+            <NumberInput source="height" style={{ display: 'inline-block', marginLeft: 32 }} />
+        </SimpleForm>
     </Edit>
 );
