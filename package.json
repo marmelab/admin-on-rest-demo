@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "admin-on-rest": "^0.5.2",
+    "admin-on-rest": "^0.6.1",
     "babel-eslint": "^7.1.1",
     "babel-polyfill": "^6.16.0",
     "eslint": "^3.10.2",
@@ -17,6 +17,7 @@
     "fakerest": "^1.2.1",
     "fetch-mock": "^5.5.0",
     "gh-pages": "^0.12.0",
+    "react-redux": "^5.0.1",
     "react-scripts": "0.7.0"
   },
   "dependencies": {

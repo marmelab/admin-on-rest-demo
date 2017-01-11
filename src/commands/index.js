@@ -1,6 +1,8 @@
 import React from 'react';
 import {
+    AutocompleteInput,
     BooleanField,
+    BooleanInput,
     Datagrid,
     DateField,
     DateInput,
@@ -16,9 +18,9 @@ import {
     TextField,
     TextInput,
 } from 'admin-on-rest/lib/mui';
-
 import Icon from 'material-ui/svg-icons/action/book';
 
+import Basket from './Basket';
 import NbItemsField from './NbItemsField';
 import FullNameField from '../visitors/FullNameField';
 
@@ -28,7 +30,7 @@ const CommandFilter = (props) => (
     <Filter {...props}>
         <TextInput label="Search" source="q" alwaysOn />
         <ReferenceInput label="Customer" source="customer_id" reference="customers">
-            <SelectInput optionText="last_name" />
+            <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
         </ReferenceInput>
         <DateInput label="Passed Since" source="date_gte" />
         <DateInput label="Passed Before" source="date_lte" />
@@ -54,13 +56,20 @@ export const CommandList = (props) => (
     </List>
 );
 
-const CommandTitle = ({ record }) => <span>
-    {record ? <img src={`${record.avatar}?size=25x25`} width="25" role="presentation" /> : null }
-    {record ? `${record.first_name} ${record.last_name}'s details` : ''}
-</span>;
-
+const CommandTitle = ({ record }) => <span>Command #{record.reference}</span>;
 export const CommandEdit = (props) => (
     <Edit title={<CommandTitle />} {...props}>
-        <TextInput source="first_name" />
+        <Basket />
+        <DateInput source="date" />
+        <ReferenceInput label="Customer" source="customer_id" reference="customers">
+            <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
+        </ReferenceInput>
+        <SelectInput source="status" choices={[
+            { id: 'delivered', name: 'delivered' },
+            { id: 'ordered', name: 'ordered' },
+            { id: 'cancelled', name: 'cancelled' },
+        ]}/>
+        <BooleanInput source="returned" />
+        <div style={{ clear: 'both' }} />
     </Edit>
 );
