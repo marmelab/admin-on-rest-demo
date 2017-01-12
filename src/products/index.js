@@ -14,8 +14,11 @@ import {
     TextField,
     TextInput,
 } from 'admin-on-rest/lib/mui';
-
 import Icon from 'material-ui/svg-icons/image/collections';
+import { Link } from 'react-router';
+import RichTextInput from 'aor-rich-text-input';
+
+import Poster from './Poster';
 
 export const ProductIcon = Icon;
 
@@ -33,10 +36,18 @@ export const ProductFilter = (props) => (
     </Filter>
 );
 
+const ImageField = ({ record }) => <img src={record.thumbnail} style={{ width: 25, maxWidth: 25, maxHeight: 25 }} role="presentation" />;
+ImageField.defaultProps = {
+    style: { padding: '0 0 0 16px' }
+}
+
+const ProductReferenceField = ({ record, basePath }) => <Link to={`${basePath}/${record.id}`}>{record.reference}</Link>;
+
 export const ProductList = (props) => (
-    <List {...props} filter={<ProductFilter />}>
+    <List {...props} filter={<ProductFilter />} perPage={25}>
         <Datagrid>
-            <TextField source="reference" />
+            <ImageField />
+            <ProductReferenceField source="reference" />
             <NumberField source="price" options={{ style: 'currency', currency: 'USD' }} />
             <NumberField source="width" options={{ minimumFractionDigits: 2 }} />
             <NumberField source="height" options={{ minimumFractionDigits: 2 }} />
@@ -49,13 +60,21 @@ export const ProductList = (props) => (
     </List>
 );
 
+const ProductTitle = ({ record }) => <span>Poster #{record.reference}</span>;
 export const ProductEdit = (props) => (
-    <Edit {...props}>
+    <Edit {...props} title={<ProductTitle />}>
         <SimpleForm>
+            <Poster />
             <TextInput source="reference" />
-            <NumberInput source="price" />
-            <NumberInput source="width" style={{ display: 'inline-block' }} />
-            <NumberInput source="height" style={{ display: 'inline-block', marginLeft: 32 }} />
+            <NumberInput source="price" elStyle={{ width: '5em' }} />
+            <NumberInput source="width" style={{ display: 'inline-block' }} elStyle={{ width: '5em' }} />
+            <NumberInput source="height" style={{ display: 'inline-block', marginLeft: 32 }} elStyle={{ width: '5em' }} />
+            <ReferenceInput label="Category" source="category_id" reference="categories">
+                <SelectInput source="name" />
+            </ReferenceInput>
+            <NumberInput source="stock" elStyle={{ width: '5em' }} />
+            <RichTextInput source="description" />
+            <div style={{ clear: 'both' }} />
         </SimpleForm>
     </Edit>
 );

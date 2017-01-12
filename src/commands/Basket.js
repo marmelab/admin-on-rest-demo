@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
     Table,
     TableBody,
-    TableFooter,
     TableHeader,
     TableHeaderColumn,
     TableRow,

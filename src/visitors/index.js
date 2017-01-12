@@ -5,8 +5,8 @@ import {
     Datagrid,
     DateField,
     DateInput,
+    Delete,
     Edit,
-    EditButton,
     Filter,
     FormTab,
     List,
@@ -21,6 +21,7 @@ import {
 
 import Icon from 'material-ui/svg-icons/social/person';
 
+import EditButton from '../buttons/EditButton';
 import FullNameField from './FullNameField';
 import NbItemsField from '../commands/NbItemsField';
 
@@ -68,8 +69,8 @@ export const VisitorList = (props) => (
 );
 
 const VisitorTitle = ({ record }) => <span>
-    {record ? <img src={`${record.avatar}?size=25x25`} width="25" role="presentation" /> : null }
-    {record ? `${record.first_name} ${record.last_name}'s details` : ''}
+    {record && <img src={`${record.avatar}?size=25x25`} width="25" role="presentation" /> }
+    {record && `${record.first_name} ${record.last_name}'s details`}
 </span>;
 
 export const VisitorEdit = (props) => (
@@ -78,7 +79,7 @@ export const VisitorEdit = (props) => (
             <FormTab label="Identity">
                 <TextInput source="first_name" style={{ display: 'inline-block' }} />
                 <TextInput source="last_name" style={{ display: 'inline-block', marginLeft: 32 }} />
-                <TextInput type="email" source="email" validation={{ email: true }} style={{ width: 544 }} />
+                <TextInput type="email" source="email" validation={{ email: true }} options={{ fullWidth: true }} style={{ width: 544 }} />
                 <DateInput source="birthday" />
             </FormTab>
             <FormTab label="Address">
@@ -107,3 +108,11 @@ export const VisitorEdit = (props) => (
         </TabbedForm>
     </Edit>
 );
+
+const VisitorDeleteTitle = ({ record }) => <span>
+    Delete customer
+    {record && <img src={`${record.avatar}?size=25x25`} width="25" role="presentation" />}
+    {record && `${record.first_name} ${record.last_name}?`}
+</span>;
+
+export const VisitorDelete = (props) => <Delete {...props} title={<VisitorDeleteTitle />} />;

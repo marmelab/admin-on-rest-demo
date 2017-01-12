@@ -7,7 +7,7 @@ import { Delete } from 'admin-on-rest/lib/mui';
 
 import './App.css';
 import data from './data';
-import { VisitorList, VisitorEdit, VisitorIcon } from './visitors';
+import { VisitorList, VisitorEdit, VisitorDelete, VisitorIcon } from './visitors';
 import { CommandList, CommandEdit, CommandIcon } from './commands';
 import { ProductList, ProductEdit, ProductIcon } from './products';
 import { CategoryList, CategoryEdit, CategoryIcon } from './categories';
@@ -30,7 +30,7 @@ class App extends Component {
     render() {
         return (
             <Admin restClient={delayedRestClient} title="Posters Galore Admin">
-                <Resource name="customers" list={VisitorList} edit={VisitorEdit} remove={Delete} icon={VisitorIcon} />
+                <Resource name="customers" list={VisitorList} edit={VisitorEdit} remove={VisitorDelete} icon={VisitorIcon} />
                 <Resource name="commands" list={CommandList} edit={CommandEdit} remove={Delete} icon={CommandIcon} />
                 <Resource name="products" list={ProductList} edit={ProductEdit} remove={Delete} icon={ProductIcon}/>
                 <Resource name="categories" list={CategoryList} edit={CategoryEdit} remove={Delete} icon={CategoryIcon} />
