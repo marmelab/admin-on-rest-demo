@@ -1,16 +1,19 @@
 import React from 'react';
 import {
     Datagrid,
+    DateField,
     Edit,
     EditButton,
     Filter,
+    FormTab,
     List,
     NumberField,
     NumberInput,
     ReferenceField,
     ReferenceInput,
+    ReferenceManyField,
     SelectInput,
-    SimpleForm,
+    TabbedForm,
     TextField,
     TextInput,
 } from 'admin-on-rest/lib/mui';
@@ -20,6 +23,8 @@ import RichTextInput from 'aor-rich-text-input';
 import Poster from './Poster';
 import ProductRefField from './ProductRefField';
 import ThumbnailField from './ThumbnailField';
+import CustomerReferenceField from '../visitors/CustomerReferenceField';
+import StarRatingField from '../reviews/StarRatingField';
 
 export const ProductIcon = Icon;
 
@@ -57,18 +62,37 @@ export const ProductList = (props) => (
 const ProductTitle = ({ record }) => <span>Poster #{record.reference}</span>;
 export const ProductEdit = (props) => (
     <Edit {...props} title={<ProductTitle />}>
-        <SimpleForm>
-            <Poster />
-            <TextInput source="reference" />
-            <NumberInput source="price" elStyle={{ width: '5em' }} />
-            <NumberInput source="width" style={{ display: 'inline-block' }} elStyle={{ width: '5em' }} />
-            <NumberInput source="height" style={{ display: 'inline-block', marginLeft: 32 }} elStyle={{ width: '5em' }} />
-            <ReferenceInput label="Category" source="category_id" reference="categories">
-                <SelectInput source="name" />
-            </ReferenceInput>
-            <NumberInput source="stock" elStyle={{ width: '5em' }} />
-            <RichTextInput source="description" />
-            <div style={{ clear: 'both' }} />
-        </SimpleForm>
+        <TabbedForm>
+            <FormTab label="Image">
+                <Poster />
+                <TextInput source="image" options={{ fullWidth: true }} />
+                <TextInput source="thumbnail" options={{ fullWidth: true }} />
+            </FormTab>
+            <FormTab label="Details">
+                <TextInput source="reference" />
+                <NumberInput source="price" elStyle={{ width: '5em' }} />
+                <NumberInput source="width" style={{ display: 'inline-block' }} elStyle={{ width: '5em' }} />
+                <NumberInput source="height" style={{ display: 'inline-block', marginLeft: 32 }} elStyle={{ width: '5em' }} />
+                <ReferenceInput label="Category" source="category_id" reference="categories">
+                    <SelectInput source="name" />
+                </ReferenceInput>
+                <NumberInput source="stock" elStyle={{ width: '5em' }} />
+            </FormTab>
+            <FormTab label="Description">
+                <RichTextInput source="description" addLabel={false}/>
+            </FormTab>
+            <FormTab label="Reviews">
+                <ReferenceManyField reference="reviews" target="product_id" addLabel={false}>
+                    <Datagrid>
+                        <DateField source="date" />
+                        <CustomerReferenceField />
+                        <StarRatingField />
+                        <TextField source="comment" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
+                        <TextField source="status" />
+                        <EditButton />
+                    </Datagrid>
+                </ReferenceManyField>
+            </FormTab>
+        </TabbedForm>
     </Edit>
 );

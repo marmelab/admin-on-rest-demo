@@ -1,28 +1,11 @@
 import React from 'react';
-import { Card, CardMedia, CardText } from 'material-ui/Card';
-import { Field } from 'redux-form';
-import TextField from 'material-ui/TextField';
-
-const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
-    <TextField
-        fullWidth
-        hintText={label}
-        floatingLabelText={label}
-        errorText={touched && error}
-        {...input}
-        {...custom}
-    />
-);
+import { Card, CardMedia } from 'material-ui/Card';
 
 const Poster = ({ record }) => (
-    <Card style={{ float: 'right', width: '42em' }} zDepth={2}>
-        <CardMedia style={{ textAlign: 'center' }}>
-            <img src={record.image} role="presentation" style={{ width: 'initial', minWidth: 'initial', maxWidth: '42em', maxHeight: '11em' }} />
+    <Card zDepth={2} style={{ display: 'inline-block', marginTop: '1em' }}>
+        <CardMedia>
+            <img src={record.image} role="presentation" style={{ width: 'initial', minWidth: 'initial', maxWidth: '42em', maxHeight: '15em' }} />
         </CardMedia>
-        <CardText>
-            <Field name="image" component={renderTextField} label="Image" />
-            <Field name="thumbnail" component={renderTextField} label="Thumbnail" />
-        </CardText>
     </Card>
 );
 
