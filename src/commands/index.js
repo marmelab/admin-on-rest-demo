@@ -19,7 +19,7 @@ import {
     TextField,
     TextInput,
 } from 'admin-on-rest/lib/mui';
-import Icon from 'material-ui/svg-icons/action/book';
+import Icon from 'material-ui/svg-icons/editor/attach-money';
 
 import Basket from './Basket';
 import NbItemsField from './NbItemsField';
