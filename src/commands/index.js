@@ -12,7 +12,6 @@ import {
     List,
     NullableBooleanInput,
     NumberField,
-    ReferenceField,
     ReferenceInput,
     SelectInput,
     SimpleForm,
@@ -23,7 +22,7 @@ import Icon from 'material-ui/svg-icons/editor/attach-money';
 
 import Basket from './Basket';
 import NbItemsField from './NbItemsField';
-import FullNameField from '../visitors/FullNameField';
+import CustomerReferenceField from '../visitors/CustomerReferenceField';
 
 export const CommandIcon = Icon;
 
@@ -45,9 +44,7 @@ export const CommandList = (props) => (
         <Datagrid >
             <DateField source="date" showTime />
             <TextField source="reference" />
-            <ReferenceField label="Customer" source="customer_id" reference="customers">
-                <FullNameField />
-            </ReferenceField>
+            <CustomerReferenceField />
             <NbItemsField />
             <NumberField source="total" options={{ style: 'currency', currency: 'USD' }} />
             <TextField source="status" />

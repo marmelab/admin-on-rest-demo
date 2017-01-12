@@ -15,10 +15,10 @@ import {
     TextInput,
 } from 'admin-on-rest/lib/mui';
 import Icon from 'material-ui/svg-icons/image/collections';
-import { Link } from 'react-router';
 import RichTextInput from 'aor-rich-text-input';
 
 import Poster from './Poster';
+import ProductRefField from './ProductRefField';
 
 export const ProductIcon = Icon;
 
@@ -41,13 +41,11 @@ ImageField.defaultProps = {
     style: { padding: '0 0 0 16px' }
 }
 
-const ProductReferenceField = ({ record, basePath }) => <Link to={`${basePath}/${record.id}`}>{record.reference}</Link>;
-
 export const ProductList = (props) => (
     <List {...props} filter={<ProductFilter />} perPage={25}>
         <Datagrid>
             <ImageField />
-            <ProductReferenceField source="reference" />
+            <ProductRefField source="reference" />
             <NumberField source="price" options={{ style: 'currency', currency: 'USD' }} />
             <NumberField source="width" options={{ minimumFractionDigits: 2 }} />
             <NumberField source="height" options={{ minimumFractionDigits: 2 }} />
