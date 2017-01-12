@@ -19,6 +19,7 @@ import RichTextInput from 'aor-rich-text-input';
 
 import Poster from './Poster';
 import ProductRefField from './ProductRefField';
+import ThumbnailField from './ThumbnailField';
 
 export const ProductIcon = Icon;
 
@@ -36,15 +37,10 @@ export const ProductFilter = (props) => (
     </Filter>
 );
 
-const ImageField = ({ record }) => <img src={record.thumbnail} style={{ width: 25, maxWidth: 25, maxHeight: 25 }} role="presentation" />;
-ImageField.defaultProps = {
-    style: { padding: '0 0 0 16px' }
-}
-
 export const ProductList = (props) => (
     <List {...props} filter={<ProductFilter />} perPage={25}>
         <Datagrid>
-            <ImageField />
+            <ThumbnailField />
             <ProductRefField source="reference" />
             <NumberField source="price" options={{ style: 'currency', currency: 'USD' }} />
             <NumberField source="width" options={{ minimumFractionDigits: 2 }} />
