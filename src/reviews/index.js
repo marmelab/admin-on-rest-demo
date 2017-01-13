@@ -63,16 +63,17 @@ export const ReviewList = (props) => (
     </List>
 );
 
+const detailStyle = { display: 'inline-block', verticalAlign: 'top', marginRight: '2em', minWidth: '8em' };
 export const ReviewEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <DateField source="date" />
-            <CustomerReferenceField />
-            <ProductReferenceField />
-            <ReferenceField source="command_id" reference="commands" label="Command" addLabel>
+            <DateField source="date" style={detailStyle} />
+            <CustomerReferenceField style={detailStyle} />
+            <ProductReferenceField style={detailStyle} />
+            <ReferenceField source="command_id" reference="commands" label="Command" addLabel style={detailStyle}>
                 <TextField source="reference" />
             </ReferenceField>
-            <StarRatingField />
+            <StarRatingField style={detailStyle} />
             <LongTextInput source="comment" />
             <SelectInput source="status" choices={[
                 { id: 'accepted', name: 'Accepted' },

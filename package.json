@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "admin-on-rest": "^0.6.1",
     "babel-eslint": "^7.1.1",
     "babel-polyfill": "^6.16.0",
     "eslint": "^3.10.2",
@@ -20,6 +19,7 @@
     "react-scripts": "0.7.0"
   },
   "dependencies": {
+    "admin-on-rest": "~0.7.0",
     "aor-rich-text-input": "^1.0.0",
     "material-ui": "~0.16.4",
     "react": "~15.4.0",
