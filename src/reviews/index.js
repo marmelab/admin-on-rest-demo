@@ -70,7 +70,7 @@ export const ReviewEdit = (props) => (
             <DateField source="date" style={detailStyle} />
             <CustomerReferenceField style={detailStyle} />
             <ProductReferenceField style={detailStyle} />
-            <ReferenceField source="command_id" reference="commands" label="Command" addLabel style={detailStyle}>
+            <ReferenceField source="command_id" reference="commands" label="Order" addLabel style={detailStyle}>
                 <TextField source="reference" />
             </ReferenceField>
             <StarRatingField style={detailStyle} />

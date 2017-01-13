@@ -87,7 +87,7 @@ export const VisitorEdit = (props) => (
                 <TextInput source="zipcode" style={{ display: 'inline-block' }} />
                 <TextInput source="city" style={{ display: 'inline-block', marginLeft: 32 }} />
             </FormTab>
-            <FormTab label="Commands">
+            <FormTab label="Orders">
                 <ReferenceManyField addLabel={false} reference="commands" target="customer_id">
                     <Datagrid>
                         <DateField source="date" />

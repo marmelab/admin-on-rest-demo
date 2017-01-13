@@ -40,7 +40,7 @@ const CommandFilter = (props) => (
 );
 
 export const CommandList = (props) => (
-    <List {...props} filter={<CommandFilter />} defaultSort={{ field: 'date', order: 'DESC' }} perPage={25}>
+    <List {...props} filter={<CommandFilter />} defaultSort={{ field: 'date', order: 'DESC' }} perPage={25} title="Orders">
         <Datagrid >
             <DateField source="date" showTime />
             <TextField source="reference" />
@@ -54,7 +54,7 @@ export const CommandList = (props) => (
     </List>
 );
 
-const CommandTitle = ({ record }) => <span>Command #{record.reference}</span>;
+const CommandTitle = ({ record }) => <span>Order #{record.reference}</span>;
 export const CommandEdit = (props) => (
     <Edit title={<CommandTitle />} {...props}>
         <SimpleForm>

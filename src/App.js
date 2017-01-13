@@ -32,7 +32,7 @@ class App extends Component {
         return (
             <Admin restClient={delayedRestClient} title="Posters Galore Admin">
                 <Resource name="customers" list={VisitorList} edit={VisitorEdit} remove={VisitorDelete} icon={VisitorIcon} />
-                <Resource name="commands" list={CommandList} edit={CommandEdit} remove={Delete} icon={CommandIcon} />
+                <Resource name="commands" list={CommandList} edit={CommandEdit} remove={Delete} icon={CommandIcon} options={{ label: 'Orders' }}/>
                 <Resource name="products" list={ProductList} edit={ProductEdit} remove={Delete} icon={ProductIcon} />
                 <Resource name="categories" list={CategoryList} edit={CategoryEdit} remove={Delete} icon={CategoryIcon} />
                 <Resource name="reviews" list={ReviewList} edit={ReviewEdit} icon={ReviewIcon} />

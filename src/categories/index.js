@@ -31,7 +31,7 @@ export const CategoryEdit = (props) => (
     <Edit title={<CategoryTitle />} {...props}>
         <SimpleForm>
             <TextInput source="name" />
-            <ReferenceManyField reference="products" target="category_id" label="Products" perPage={5}>
+            <ReferenceManyField reference="products" target="category_id" label="Orders" perPage={5}>
                 <Datagrid>
                     <ThumbnailField />
                     <ProductRefField source="reference" />
