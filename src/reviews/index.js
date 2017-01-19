@@ -21,6 +21,7 @@ import Icon from 'material-ui/svg-icons/communication/comment';
 import ProductReferenceField from '../products/ProductReferenceField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from './StarRatingField';
+import ApproveButton from './ApproveButton';
 
 export const ReviewIcon = Icon;
 
@@ -58,7 +59,8 @@ export const ReviewList = (props) => (
             <StarRatingField />
             <TextField source="comment" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
             <TextField source="status" />
-            <EditButton />
+            <ApproveButton style={{ padding: 0 }} />
+            <EditButton style={{ padding: 0 }} />
         </Datagrid>
     </List>
 );
