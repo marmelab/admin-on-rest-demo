@@ -20,15 +20,14 @@ import {
 import Icon from 'material-ui/svg-icons/image/collections';
 import RichTextInput from 'aor-rich-text-input';
 
-import Poster from './Poster';
-import ProductRefField from './ProductRefField';
-import ThumbnailField from './ThumbnailField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
+import GridList from './GridList';
+import Poster from './Poster';
 
 export const ProductIcon = Icon;
 
-export const ProductFilter = (props) => (
+export const ProductFilter = props => (
     <Filter {...props}>
         <TextInput label="Search" source="q" alwaysOn />
         <ReferenceInput label="Category" source="category_id" reference="categories">
@@ -42,20 +41,9 @@ export const ProductFilter = (props) => (
     </Filter>
 );
 
-export const ProductList = (props) => (
-    <List {...props} filters={<ProductFilter />} perPage={25}>
-        <Datagrid>
-            <ThumbnailField />
-            <ProductRefField source="reference" />
-            <NumberField source="price" options={{ style: 'currency', currency: 'USD' }} />
-            <NumberField source="width" options={{ minimumFractionDigits: 2 }} />
-            <NumberField source="height" options={{ minimumFractionDigits: 2 }} />
-            <ReferenceField source="category_id" reference="categories" label="Category">
-                <TextField source="name" />
-            </ReferenceField>
-            <NumberField source="stock" />
-            <EditButton />
-        </Datagrid>
+export const ProductList = props => (
+    <List {...props} filters={<ProductFilter />} perPage={20}>
+        <GridList />
     </List>
 );
 
