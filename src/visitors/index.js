@@ -2,6 +2,7 @@ import React from 'react';
 import {
     BooleanField,
     ChipField,
+    SelectInput,
     Datagrid,
     DateField,
     DateInput,
@@ -22,8 +23,11 @@ import {
 import Icon from 'material-ui/svg-icons/social/person';
 
 import EditButton from '../buttons/EditButton';
-import FullNameField from './FullNameField';
 import NbItemsField from '../commands/NbItemsField';
+import ProductReferenceField from '../products/ProductReferenceField';
+import StarRatingField from '../reviews/StarRatingField';
+import FullNameField from './FullNameField';
+import segments from './segments';
 
 export const VisitorIcon = Icon;
 
@@ -33,6 +37,7 @@ const VisitorFilter = (props) => (
         <DateInput label="Visited Since" source="last_seen_gte" />
         <NullableBooleanInput source="has_ordered" />
         <NullableBooleanInput source="has_newsletter" />
+        <SelectInput label="Segments" source="groups" choices={segments} />
     </Filter>
 );
 
@@ -48,6 +53,9 @@ const ArrayField = ({ record, source, Renderer = ChipField }) => (
         {record[source].map(value => <Renderer key={value} record={{ value }} source="value" />)}
     </div>
 );
+ArrayField.defaultProps = {
+    addLabel: true,
+};
 
 const rowStyle = (record, index) => ({
     backgroundColor: index % 2 ? '#eee' : 'white',
@@ -99,7 +107,19 @@ export const VisitorEdit = (props) => (
                     </Datagrid>
                 </ReferenceManyField>
             </FormTab>
+            <FormTab label="Reviews">
+                <ReferenceManyField addLabel={false} reference="reviews" target="customer_id">
+                    <Datagrid filter={{ status: 'approved' }}>
+                        <DateField source="date" />
+                        <ProductReferenceField />
+                        <StarRatingField />
+                        <TextField source="comment" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
+                        <EditButton style={{ padding: 0 }} />
+                    </Datagrid>
+                </ReferenceManyField>
+            </FormTab>
             <FormTab label="Stats">
+                <ArrayField source="groups" label="Segments" />
                 <NullableBooleanInput source="has_newsletter" />
                 <DateField source="first_seen" style={{ width: 128, display: 'inline-block' }} />
                 <DateField source="latest_purchase" style={{ width: 128, display: 'inline-block' }} />

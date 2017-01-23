@@ -22,6 +22,7 @@ import ProductReferenceField from '../products/ProductReferenceField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from './StarRatingField';
 import ApproveButton from './ApproveButton';
+import rowStyle from './rowStyle';
 
 export const ReviewIcon = Icon;
 
@@ -44,12 +45,6 @@ export const ReviewFilter = (props) => (
     </Filter>
 );
 
-const rowStyle = (record) => {
-    if (record.status === 'accepted') return { backgroundColor: '#dfd' };
-    if (record.status === 'pending') return { backgroundColor: '#ffd' };
-    if (record.status === 'rejected') return { backgroundColor: '#fdd' };
-    return {};
-}
 export const ReviewList = (props) => (
     <List {...props} filters={<ReviewFilter />} perPage={25} sort={{ field: 'date', order: 'DESC' }}>
         <Datagrid rowStyle={rowStyle}>
