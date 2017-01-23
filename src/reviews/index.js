@@ -51,7 +51,7 @@ const rowStyle = (record) => {
     return {};
 }
 export const ReviewList = (props) => (
-    <List {...props} filter={<ReviewFilter />} perPage={25} defaultSort={{ field: 'date', order: 'DESC' }}>
+    <List {...props} filters={<ReviewFilter />} perPage={25} sort={{ field: 'date', order: 'DESC' }}>
         <Datagrid rowStyle={rowStyle}>
             <DateField source="date" />
             <CustomerReferenceField />

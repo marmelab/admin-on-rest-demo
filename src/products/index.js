@@ -43,7 +43,7 @@ export const ProductFilter = (props) => (
 );
 
 export const ProductList = (props) => (
-    <List {...props} filter={<ProductFilter />} perPage={25}>
+    <List {...props} filters={<ProductFilter />} perPage={25}>
         <Datagrid>
             <ThumbnailField />
             <ProductRefField source="reference" />

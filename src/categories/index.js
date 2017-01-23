@@ -18,7 +18,7 @@ import ProductRefField from '../products/ProductRefField';
 export const CategoryIcon = Icon;
 
 export const CategoryList = (props) => (
-    <List {...props} defaultSort={{ field: 'name', order: 'ASC' }}>
+    <List {...props} sort={{ field: 'name', order: 'ASC' }}>
         <Datagrid >
             <TextField source="name" style={{ padding: '0 12px 0 25px' }} />
             <EditButton />

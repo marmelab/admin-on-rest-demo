@@ -54,7 +54,7 @@ const rowStyle = (record, index) => ({
 })
 
 export const VisitorList = (props) => (
-    <List {...props} filter={<VisitorFilter />} defaultSort={{ field: 'last_seen', order: 'DESC' }} perPage={25}>
+    <List {...props} filters={<VisitorFilter />} sort={{ field: 'last_seen', order: 'DESC' }} perPage={25}>
         <Datagrid rowStyle={rowStyle}>
             <FullNameField />
             <DateField source="last_seen" type="date" />
