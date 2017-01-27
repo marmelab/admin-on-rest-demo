@@ -4,11 +4,11 @@ import { NumberField, EditButton } from 'admin-on-rest/lib/mui';
 
 const styles = {
     root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
+        margin: '-2px',
     },
     gridList: {
+        width: '100%',
+        margin: 0,
     },
 };
 
