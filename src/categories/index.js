@@ -14,6 +14,7 @@ import Icon from 'material-ui/svg-icons/action/bookmark';
 
 import ThumbnailField from '../products/ThumbnailField';
 import ProductRefField from '../products/ProductRefField';
+import LinkToRelatedProducts from './LinkToRelatedProducts';
 
 export const CategoryIcon = Icon;
 
@@ -21,6 +22,7 @@ export const CategoryList = (props) => (
     <List {...props} sort={{ field: 'name', order: 'ASC' }}>
         <Datagrid >
             <TextField source="name" style={{ padding: '0 12px 0 25px' }} />
+            <LinkToRelatedProducts />
             <EditButton />
         </Datagrid>
     </List>

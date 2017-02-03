@@ -46,7 +46,7 @@ export const CommandList = (props) => (
             <TextField source="reference" />
             <CustomerReferenceField />
             <NbItemsField />
-            <NumberField source="total" options={{ style: 'currency', currency: 'USD' }} />
+            <NumberField source="total" options={{ style: 'currency', currency: 'USD' }} elStyle={{ fontWeight: 'bold' }}/>
             <TextField source="status" />
             <BooleanField source="returned" />
             <EditButton />
