@@ -36,7 +36,7 @@ const VisitorFilter = (props) => (
         <TextInput label="Search" source="q" alwaysOn />
         <DateInput label="Visited Since" source="last_seen_gte" />
         <NullableBooleanInput source="has_ordered" />
-        <NullableBooleanInput source="has_newsletter" />
+        <NullableBooleanInput source="has_newsletter" defaultValue={true} />
         <SelectInput label="Segments" source="groups" choices={segments} />
     </Filter>
 );

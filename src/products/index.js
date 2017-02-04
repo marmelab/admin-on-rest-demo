@@ -16,6 +16,7 @@ import {
     TextInput,
 } from 'admin-on-rest/lib/mui';
 import Icon from 'material-ui/svg-icons/image/collections';
+import Chip from 'material-ui/Chip';
 import RichTextInput from 'aor-rich-text-input';
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
@@ -24,6 +25,8 @@ import GridList from './GridList';
 import Poster from './Poster';
 
 export const ProductIcon = Icon;
+
+const QuickFilter = ({ label }) => <Chip>{ label }</Chip>;
 
 export const ProductFilter = props => (
     <Filter {...props}>
@@ -35,7 +38,7 @@ export const ProductFilter = props => (
         <NumberInput label="Max width" source="width_lte" />
         <NumberInput label="Min height" source="height_gte" />
         <NumberInput label="Max height" source="height_lte" />
-        <NumberInput label="Low Stock" source="stock_lte" />
+        <QuickFilter label="Low Stock" source="stock_lte" defaultValue={10} />
     </Filter>
 );
 
