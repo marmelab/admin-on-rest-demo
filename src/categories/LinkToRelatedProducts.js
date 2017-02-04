@@ -9,7 +9,7 @@ const LinkToRelatedProducts = ({ record }) => (
         primary
         label="Products"
         icon={<ProductIcon />}
-        containerElement={<Link to="/products" query={{ filter: JSON.stringify({ category_id: record.id }) }} />}
+        containerElement={<Link to={{ pathname: "/products", query: { filter: JSON.stringify({ category_id: record.id }) } }} />}
     />
 );
 
