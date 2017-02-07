@@ -8,6 +8,7 @@ import { Delete } from 'admin-on-rest/lib/mui';
 import './App.css';
 import data from './data';
 
+import authClient from './authClient';
 import sagas from './sagas';
 import { VisitorList, VisitorEdit, VisitorDelete, VisitorIcon } from './visitors';
 import { CommandList, CommandEdit, CommandIcon } from './commands';
@@ -32,7 +33,7 @@ class App extends Component {
 
     render() {
         return (
-            <Admin title="Posters Galore Admin" restClient={delayedRestClient} customSagas={sagas}>
+            <Admin title="Posters Galore Admin" restClient={delayedRestClient} customSagas={sagas} authClient={authClient}>
                 <Resource name="customers" list={VisitorList} edit={VisitorEdit} remove={VisitorDelete} icon={VisitorIcon} />
                 <Resource name="commands" list={CommandList} edit={CommandEdit} remove={Delete} icon={CommandIcon} options={{ label: 'Orders' }}/>
                 <Resource name="products" list={ProductList} edit={ProductEdit} remove={Delete} icon={ProductIcon} />

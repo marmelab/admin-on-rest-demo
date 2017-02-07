@@ -22,6 +22,7 @@ import ProductReferenceField from '../products/ProductReferenceField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from './StarRatingField';
 import ApproveButton from './ApproveButton';
+import ReviewEditActions from './ReviewEditActions';
 import rowStyle from './rowStyle';
 
 export const ReviewIcon = Icon;
@@ -62,7 +63,7 @@ export const ReviewList = (props) => (
 
 const detailStyle = { display: 'inline-block', verticalAlign: 'top', marginRight: '2em', minWidth: '8em' };
 export const ReviewEdit = (props) => (
-    <Edit {...props}>
+    <Edit {...props} actions={<ReviewEditActions />}>
         <SimpleForm>
             <DateField source="date" style={detailStyle} />
             <CustomerReferenceField style={detailStyle} />
