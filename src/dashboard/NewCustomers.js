@@ -3,7 +3,7 @@ import { Card, CardTitle } from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 
-const style = { width: '100%' };
+const style = { marginLeft: '1em', flex: 1 };
 
 export default ({ visitors = [] }) => (
     <Card style={style}>

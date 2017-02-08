@@ -6,15 +6,17 @@ import MonthlyRevenue from './MonthlyRevenue';
 import NbPendingOrders from './NbPendingOrders';
 import NbPendingReviews from './NbPendingReviews';
 import NbNewCustomers from './NbNewCustomers';
-import NewCustomers from './NewCustomers';
 import PendingOrders from './PendingOrders';
+import PendingReviews from './PendingReviews';
+import NewCustomers from './NewCustomers';
 import restClient from '../restClient';
 
 const styles = {
     main: { margin: '2em' },
-    welcome: { marginBottom: '2em' },
-    bar: { display: 'flex' },
-    data: { display: 'flex', marginTop: '2em' },
+    welcome: { marginBottom: '1em' },
+    bar: { display: 'flex', margin: '0 -1em 0 -1em' },
+    data: { display: 'flex', margin: '0 -1em 0 -1em' },
+    data2: { padding: '1em', flex: 1, display: 'flex' },
 };
 
 class Dashboard extends Component {
@@ -63,8 +65,8 @@ class Dashboard extends Component {
                 sort: { field: 'date', order: 'DESC' },
                 pagination: { page: 1, perPage: 100 },
             })
-            .then(response => response.data.reduce(nb => ++nb, 0))
-            .then(pendingReviews => this.setState({ pendingReviews }))
+            .then(response => response.data)
+            .then(pendingReviews => this.setState({ pendingReviews, nbPendingReviews: pendingReviews.reduce(nb => ++nb, 0) }));
         restClient(GET_LIST, 'customers', {
                 filter: { has_ordered: true, first_seen_gte: d.toISOString() },
                 sort: { field: 'first_seen', order: 'DESC' },
@@ -84,12 +86,15 @@ class Dashboard extends Component {
                 <div style={styles.bar}>
                     <MonthlyRevenue value={this.state.revenue} />
                     <NbPendingOrders value={this.state.nbPendingOrders} />
-                    <NbPendingReviews value={this.state.pendingReviews} />
+                    <NbPendingReviews value={this.state.nbPendingReviews} />
                     <NbNewCustomers value={this.state.newCustomersNumber} />
                 </div>
                 <div style={styles.data}>
                     <PendingOrders orders={this.state.pendingOrders} customers={this.state.pendingOrdersCustomers} />
-                    <NewCustomers visitors={this.state.newCustomers} />
+                    <div style={styles.data2}>
+                        <PendingReviews reviews={this.state.pendingReviews} />
+                        <NewCustomers visitors={this.state.newCustomers} />
+                    </div>
                 </div>
             </div>
         );

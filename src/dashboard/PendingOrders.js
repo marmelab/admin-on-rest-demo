@@ -3,7 +3,7 @@ import { Card, CardTitle } from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 
-const style = { width: '100%', marginRight: '2em' };
+const style = { margin: '1em', flex: 1 };
 
 export default ({ orders = [], customers = {} }) => (
     <Card style={style}>
