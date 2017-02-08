@@ -32,6 +32,11 @@ const CommandFilter = (props) => (
         <ReferenceInput label="Customer" source="customer_id" reference="customers">
             <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
         </ReferenceInput>
+        <SelectInput source="status" choices={[
+            { id: 'delivered', name: 'delivered' },
+            { id: 'ordered', name: 'ordered' },
+            { id: 'cancelled', name: 'cancelled' },
+        ]} />
         <DateInput label="Passed Since" source="date_gte" />
         <DateInput label="Passed Before" source="date_lte" />
         <TextInput label="Min Amount" source="total_gte" />
