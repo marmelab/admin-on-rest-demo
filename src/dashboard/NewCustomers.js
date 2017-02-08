@@ -1,15 +1,19 @@
 import React from 'react';
 import { Card, CardTitle } from 'material-ui/Card';
-import CustomerIcon from 'material-ui/svg-icons/social/person-add';
+import { List, ListItem } from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
 
-const styles = {
-    card: { borderLeft: 'solid 4px #4caf50', width: '100%' },
-    icon: { float: 'right', width: 64, height: 64, padding: 16, color: '#4caf50' },
-};
+const style = { width: '100%' };
 
-export default ({ value }) => (
-    <Card style={styles.card}>
-        <CustomerIcon style={styles.icon} />
-        <CardTitle title={value} subtitle="New Customers" />
+export default ({ visitors = [] }) => (
+    <Card style={style}>
+        <CardTitle title="New Registrations" />
+        <List>
+            {visitors.map(record =>
+                <ListItem href={`/#/customers/${record.id}`} key={record.id} leftAvatar={<Avatar src={`${record.avatar}?size=32x32`} />} >
+                    {record.first_name} {record.last_name}
+                </ListItem>
+            )}
+        </List>
     </Card>
 );

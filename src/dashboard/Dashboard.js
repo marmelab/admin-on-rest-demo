@@ -3,10 +3,10 @@ import { GET_LIST } from 'admin-on-rest';
 
 import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
-import PendingOrders from './PendingOrders';
-import PendingReviews from './PendingReviews';
+import NbPendingOrders from './NbPendingOrders';
+import NbPendingReviews from './NbPendingReviews';
+import NbNewCustomers from './NbNewCustomers';
 import NewCustomers from './NewCustomers';
-import NewRegistrations from './NewRegistrations';
 import restClient from '../restClient';
 
 const styles = {
@@ -31,16 +31,20 @@ class Dashboard extends Component {
                 .filter(order => order.status !== 'cancelled')
                 .reduce((stats, order) => {
                     if (order.status !== 'cancelled') stats.revenue += order.total;
-                    if (order.status === 'ordered') stats.pendingOrders++;
+                    if (order.status === 'ordered') {
+                        stats.nbPendingOrders++;
+                        stats.pendingOrders.push(order);
+                    }
                     return stats;
-                }, { revenue: 0, pendingOrders: 0})
+                }, { revenue: 0, nbPendingOrders: 0, pendingOrders: [] })
             )
-            .then(({ revenue, pendingOrders }) => this.setState({
+            .then(({ revenue, nbPendingOrders, pendingOrders }) => this.setState({
                 revenue: revenue.toLocaleString(undefined, {
                     style: 'currency',
                     currency: 'USD',
                     maximumFractionDigits: 0,
                 }),
+                nbPendingOrders,
                 pendingOrders,
             }));
         restClient(GET_LIST, 'reviews', {
@@ -70,12 +74,12 @@ class Dashboard extends Component {
                 <Welcome style={styles.welcome} />
                 <div style={styles.bar}>
                     <MonthlyRevenue value={this.state.revenue} />
-                    <PendingOrders value={this.state.pendingOrders} />
-                    <PendingReviews value={this.state.pendingReviews} />
-                    <NewCustomers value={this.state.newCustomersNumber} />
+                    <NbPendingOrders value={this.state.nbPendingOrders} />
+                    <NbPendingReviews value={this.state.pendingReviews} />
+                    <NbNewCustomers value={this.state.newCustomersNumber} />
                 </div>
                 <div style={styles.data}>
-                    <NewRegistrations visitors={this.state.newCustomers} />
+                    <NewCustomers visitors={this.state.newCustomers} />
                 </div>
             </div>
         );
