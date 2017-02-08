@@ -60,13 +60,27 @@ class Dashboard extends Component {
                 return prev;
             }, {}))
             .then(customers => this.setState({ pendingOrdersCustomers: customers }));
+
         restClient(GET_LIST, 'reviews', {
                 filter: { status: 'pending' },
                 sort: { field: 'date', order: 'DESC' },
                 pagination: { page: 1, perPage: 100 },
             })
             .then(response => response.data)
-            .then(pendingReviews => this.setState({ pendingReviews, nbPendingReviews: pendingReviews.reduce(nb => ++nb, 0) }));
+            .then(reviews => {
+                const nbPendingReviews = reviews.reduce(nb => ++nb, 0);
+                const pendingReviews = reviews.slice(0, Math.min(10, reviews.length));
+                this.setState({ pendingReviews, nbPendingReviews });
+                return pendingReviews;
+            })
+            .then(reviews => reviews.map(review => review.customer_id))
+            .then(customerIds => restClient(GET_MANY, 'customers', { ids: customerIds }))
+            .then(customers => customers.reduce((prev, customer) => {
+                prev[customer.id] = customer; // eslint-disable-line no-param-reassign
+                return prev;
+            }, {}))
+            .then(customers => this.setState({ pendingReviewsCustomers: customers }));
+
         restClient(GET_LIST, 'customers', {
                 filter: { has_ordered: true, first_seen_gte: d.toISOString() },
                 sort: { field: 'first_seen', order: 'DESC' },
@@ -75,25 +89,26 @@ class Dashboard extends Component {
             .then(response => response.data)
             .then(newCustomers => {
                 this.setState({ newCustomers });
-                this.setState({ newCustomersNumber: newCustomers.reduce(nb => ++nb, 0) })
+                this.setState({ nbNewCustomers: newCustomers.reduce(nb => ++nb, 0) })
             })
     }
 
     render() {
+        const { revenue, nbPendingOrders, nbPendingReviews, nbNewCustomers, pendingOrders, pendingOrdersCustomers, pendingReviews, pendingReviewsCustomers, newCustomers } = this.state;
         return (
             <div style={styles.main}>
                 <Welcome style={styles.welcome} />
                 <div style={styles.bar}>
-                    <MonthlyRevenue value={this.state.revenue} />
-                    <NbPendingOrders value={this.state.nbPendingOrders} />
-                    <NbPendingReviews value={this.state.nbPendingReviews} />
-                    <NbNewCustomers value={this.state.newCustomersNumber} />
+                    <MonthlyRevenue value={revenue} />
+                    <NbPendingOrders value={nbPendingOrders} />
+                    <NbPendingReviews value={nbPendingReviews} />
+                    <NbNewCustomers value={nbNewCustomers} />
                 </div>
                 <div style={styles.data}>
-                    <PendingOrders orders={this.state.pendingOrders} customers={this.state.pendingOrdersCustomers} />
+                    <PendingOrders orders={pendingOrders} customers={pendingOrdersCustomers} />
                     <div style={styles.data2}>
-                        <PendingReviews reviews={this.state.pendingReviews} />
-                        <NewCustomers visitors={this.state.newCustomers} />
+                        <PendingReviews reviews={pendingReviews} customers={pendingReviewsCustomers} />
+                        <NewCustomers visitors={newCustomers} />
                     </div>
                 </div>
             </div>
