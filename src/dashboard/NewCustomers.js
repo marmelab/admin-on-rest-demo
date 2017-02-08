@@ -15,7 +15,7 @@ export default ({ visitors = [], nb }) => (
         <CardTitle title={nb} subtitle="New Customers" />
         <List>
             {visitors.map(record =>
-                <ListItem href={`/#/customers/${record.id}`} key={record.id} leftAvatar={<Avatar src={`${record.avatar}?size=32x32`} />} >
+                <ListItem href={`#/customers/${record.id}`} key={record.id} leftAvatar={<Avatar src={`${record.avatar}?size=32x32`} />} >
                     {record.first_name} {record.last_name}
                 </ListItem>
             )}

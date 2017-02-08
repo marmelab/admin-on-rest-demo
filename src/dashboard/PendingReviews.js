@@ -19,7 +19,7 @@ export default ({ reviews = [], customers = {}, nb }) => (
             {reviews.map(record =>
                 <ListItem
                     key={record.id}
-                    href={`/#/reviews/${record.id}`}
+                    href={`#/reviews/${record.id}`}
                     primaryText={<StarRatingField record={record} />}
                     secondaryText={record.comment}
                     secondaryTextLines={2}

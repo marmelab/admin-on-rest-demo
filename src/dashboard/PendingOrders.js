@@ -12,7 +12,7 @@ export default ({ orders = [], customers = {} }) => (
             {orders.map(record =>
                 <ListItem
                     key={record.id}
-                    href={`/#/commands/${record.id}`}
+                    href={`#/commands/${record.id}`}
                     primaryText={new Date(record.date).toLocaleString('en-GB')}
                     secondaryText={
                         <p>
