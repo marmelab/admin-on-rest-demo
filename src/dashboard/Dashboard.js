@@ -6,12 +6,14 @@ import MonthlyRevenue from './MonthlyRevenue';
 import PendingOrders from './PendingOrders';
 import PendingReviews from './PendingReviews';
 import NewCustomers from './NewCustomers';
+import NewRegistrations from './NewRegistrations';
 import restClient from '../restClient';
 
 const styles = {
     main: { margin: '2em' },
     welcome: { marginBottom: '2em' },
     bar: { display: 'flex' },
+    data: { display: 'flex', marginTop: '2em' },
 };
 
 class Dashboard extends Component {
@@ -55,10 +57,11 @@ class Dashboard extends Component {
                 sort: { field: 'first_seen', order: 'DESC' },
                 pagination: { page: 1, perPage: 100 },
             })
-            .then(response => response.data
-                .reduce(nb => ++nb, 0)
-            )
-            .then(newCustomers => this.setState({ newCustomers }))
+            .then(response => response.data)
+            .then(newCustomers => {
+                this.setState({ newCustomers });
+                this.setState({ newCustomersNumber: newCustomers.reduce(nb => ++nb, 0) })
+            })
     }
 
     render() {
@@ -69,7 +72,10 @@ class Dashboard extends Component {
                     <MonthlyRevenue value={this.state.revenue} />
                     <PendingOrders value={this.state.pendingOrders} />
                     <PendingReviews value={this.state.pendingReviews} />
-                    <NewCustomers value={this.state.newCustomers} />
+                    <NewCustomers value={this.state.newCustomersNumber} />
+                </div>
+                <div style={styles.data}>
+                    <NewRegistrations visitors={this.state.newCustomers} />
                 </div>
             </div>
         );
