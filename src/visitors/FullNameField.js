@@ -1,8 +1,10 @@
 import React from 'react';
 import AvatarField from './AvatarField';
+import pure from 'recompose/pure';
 
-const FullNameField = ({ record = {} }) => <span>
-    <AvatarField record={record} />
+const FullNameField = ({ record = {}, size = 25 }) => <span>
+    <AvatarField record={record} size={size} />
+    <span style={{ display: 'inline-block', width: size/3 }}>&nbsp;</span>
     {record.first_name} {record.last_name}
 </span>;
 
@@ -11,4 +13,4 @@ FullNameField.defaultProps = {
     label: 'Name',
 };
 
-export default FullNameField;
+export default pure(FullNameField);

@@ -76,10 +76,7 @@ export const VisitorList = (props) => (
     </List>
 );
 
-const VisitorTitle = ({ record }) => <span>
-    {record && <img src={`${record.avatar}?size=25x25`} width="25" role="presentation" /> }
-    {record && `${record.first_name} ${record.last_name}'s details`}
-</span>;
+const VisitorTitle = ({ record }) => record ? <FullNameField record={record} size={32} /> : null;
 
 export const VisitorEdit = (props) => (
     <Edit title={<VisitorTitle />} {...props}>

@@ -1,11 +1,9 @@
 import React from 'react';
+import Avatar from 'material-ui/Avatar';
 
-const AvatarField = ({ record, size }) => <img
-    style={{ verticalAlign: 'text-bottom' }}
-    src={`${record.avatar}?size=${size}x${size}`}
-    width={size}
-    role="presentation"
-/>;
+const style= { verticalAlign: 'middle' };
+const AvatarField = ({ record, size }) =>
+    <Avatar src={`${record.avatar}?size=${size}x${size}`} size={size} style={style} />;
 
 AvatarField.defaultProps = {
     size: 25,
