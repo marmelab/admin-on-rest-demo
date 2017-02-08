@@ -47,6 +47,7 @@ class Dashboard extends Component {
                     revenue: revenue.toLocaleString(undefined, {
                         style: 'currency',
                         currency: 'USD',
+                        minimumFractionDigits: 0,
                         maximumFractionDigits: 0,
                     }),
                     nbNewOrders,
