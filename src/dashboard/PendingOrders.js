@@ -16,12 +16,11 @@ export default ({ orders = [], customers = {} }) => (
                     primaryText={new Date(record.date).toLocaleString('en-GB')}
                     secondaryText={
                         <p>
-                            {record.basket.length} items, {record.total}$
-                            <br />
-                            {customers[record.customer_id] ? `by ${customers[record.customer_id].first_name} ${customers[record.customer_id].last_name}` : null}
+                            {customers[record.customer_id] ? `by ${customers[record.customer_id].first_name} ${customers[record.customer_id].last_name}, ` : null}
+                            {record.basket.length} items
                         </p>
                     }
-                    secondaryTextLines={2}
+                    rightAvatar={<strong>{record.total}$</strong>}
                     leftAvatar={customers[record.customer_id] ? <Avatar src={`${customers[record.customer_id].avatar}?size=32x32`} /> : <Avatar />}
                 />
             )}
