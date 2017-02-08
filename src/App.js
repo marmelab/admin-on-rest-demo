@@ -7,6 +7,7 @@ import './App.css';
 
 import authClient from './authClient';
 import sagas from './sagas';
+import Login from './Login';
 import { Dashboard } from './dashboard';
 import { VisitorList, VisitorEdit, VisitorDelete, VisitorIcon } from './visitors';
 import { CommandList, CommandEdit, CommandIcon } from './commands';
@@ -28,7 +29,7 @@ class App extends Component {
 
     render() {
         return (
-            <Admin title="Posters Galore Admin" restClient={restClient} customSagas={sagas} authClient={authClient} dashboard={Dashboard}>
+            <Admin title="Posters Galore Admin" restClient={restClient} customSagas={sagas} authClient={authClient} dashboard={Dashboard} loginPage={Login}>
                 <Resource name="customers" list={VisitorList} edit={VisitorEdit} remove={VisitorDelete} icon={VisitorIcon} />
                 <Resource name="commands" list={CommandList} edit={CommandEdit} remove={Delete} icon={CommandIcon} options={{ label: 'Orders' }}/>
                 <Resource name="products" list={ProductList} edit={ProductEdit} remove={Delete} icon={ProductIcon} />
