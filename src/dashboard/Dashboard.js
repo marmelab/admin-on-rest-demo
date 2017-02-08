@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GET_LIST } from 'admin-on-rest';
+import { GET_LIST, GET_MANY } from 'admin-on-rest';
 
 import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
@@ -7,6 +7,7 @@ import NbPendingOrders from './NbPendingOrders';
 import NbPendingReviews from './NbPendingReviews';
 import NbNewCustomers from './NbNewCustomers';
 import NewCustomers from './NewCustomers';
+import PendingOrders from './PendingOrders';
 import restClient from '../restClient';
 
 const styles = {
@@ -38,23 +39,31 @@ class Dashboard extends Component {
                     return stats;
                 }, { revenue: 0, nbPendingOrders: 0, pendingOrders: [] })
             )
-            .then(({ revenue, nbPendingOrders, pendingOrders }) => this.setState({
-                revenue: revenue.toLocaleString(undefined, {
-                    style: 'currency',
-                    currency: 'USD',
-                    maximumFractionDigits: 0,
-                }),
-                nbPendingOrders,
-                pendingOrders,
-            }));
+            .then(({ revenue, nbPendingOrders, pendingOrders }) => {
+                this.setState({
+                    revenue: revenue.toLocaleString(undefined, {
+                        style: 'currency',
+                        currency: 'USD',
+                        maximumFractionDigits: 0,
+                    }),
+                    nbPendingOrders,
+                    pendingOrders,
+                });
+                return pendingOrders;
+            })
+            .then(pendingOrders => pendingOrders.map(order => order.customer_id))
+            .then(customerIds => restClient(GET_MANY, 'customers', { ids: customerIds }))
+            .then(customers => customers.reduce((prev, customer) => {
+                prev[customer.id] = customer; // eslint-disable-line no-param-reassign
+                return prev;
+            }, {}))
+            .then(customers => this.setState({ pendingOrdersCustomers: customers }));
         restClient(GET_LIST, 'reviews', {
                 filter: { status: 'pending' },
                 sort: { field: 'date', order: 'DESC' },
                 pagination: { page: 1, perPage: 100 },
             })
-            .then(response => response.data
-                .reduce(nb => ++nb, 0)
-            )
+            .then(response => response.data.reduce(nb => ++nb, 0))
             .then(pendingReviews => this.setState({ pendingReviews }))
         restClient(GET_LIST, 'customers', {
                 filter: { has_ordered: true, first_seen_gte: d.toISOString() },
@@ -79,6 +88,7 @@ class Dashboard extends Component {
                     <NbNewCustomers value={this.state.newCustomersNumber} />
                 </div>
                 <div style={styles.data}>
+                    <PendingOrders orders={this.state.pendingOrders} customers={this.state.pendingOrdersCustomers} />
                     <NewCustomers visitors={this.state.newCustomers} />
                 </div>
             </div>
