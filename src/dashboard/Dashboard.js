@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import { GET_LIST } from 'admin-on-rest';
+
+import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
 import PendingOrders from './PendingOrders';
 import PendingReviews from './PendingReviews';
 import NewCustomers from './NewCustomers';
-import { GET_LIST } from 'admin-on-rest';
 import restClient from '../restClient';
 
 const styles = {
-    bar: { display: 'flex', margin: '2em' },
+    main: { margin: '2em' },
+    welcome: { marginBottom: '2em' },
+    bar: { display: 'flex' },
 };
 
 class Dashboard extends Component {
@@ -59,11 +63,14 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <div style={styles.bar}>
-                <MonthlyRevenue value={this.state.revenue} />
-                <PendingOrders value={this.state.pendingOrders} />
-                <PendingReviews value={this.state.pendingReviews} />
-                <NewCustomers value={this.state.newCustomers} />
+            <div style={styles.main}>
+                <Welcome style={styles.welcome} />
+                <div style={styles.bar}>
+                    <MonthlyRevenue value={this.state.revenue} />
+                    <PendingOrders value={this.state.pendingOrders} />
+                    <PendingReviews value={this.state.pendingReviews} />
+                    <NewCustomers value={this.state.newCustomers} />
+                </div>
             </div>
         );
     }
