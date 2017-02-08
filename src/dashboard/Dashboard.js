@@ -3,9 +3,7 @@ import { GET_LIST, GET_MANY } from 'admin-on-rest';
 
 import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
-import NbPendingOrders from './NbPendingOrders';
-import NbPendingReviews from './NbPendingReviews';
-import NbNewCustomers from './NbNewCustomers';
+import NbNewOrders from './NbNewOrders';
 import PendingOrders from './PendingOrders';
 import PendingReviews from './PendingReviews';
 import NewCustomers from './NewCustomers';
@@ -13,10 +11,11 @@ import restClient from '../restClient';
 
 const styles = {
     main: { margin: '2em' },
-    welcome: { marginBottom: '1em' },
-    bar: { display: 'flex', margin: '0 -1em 0 -1em' },
-    data: { display: 'flex', margin: '0 -1em 0 -1em' },
-    data2: { padding: '1em', flex: 1, display: 'flex' },
+    welcome: { marginBottom: '2em' },
+    flex: { display: 'flex' },
+    leftCol: { flex: 1, marginRight: '1em' },
+    rightCol: { flex: 1, marginLeft: '1em' },
+    singleCol: { marginTop: '2em' },
 };
 
 class Dashboard extends Component {
@@ -33,22 +32,24 @@ class Dashboard extends Component {
             .then(response => response.data
                 .filter(order => order.status !== 'cancelled')
                 .reduce((stats, order) => {
-                    if (order.status !== 'cancelled') stats.revenue += order.total;
+                    if (order.status !== 'cancelled') {
+                        stats.revenue += order.total;
+                        stats.nbNewOrders++;
+                    }
                     if (order.status === 'ordered') {
-                        stats.nbPendingOrders++;
                         stats.pendingOrders.push(order);
                     }
                     return stats;
-                }, { revenue: 0, nbPendingOrders: 0, pendingOrders: [] })
+                }, { revenue: 0, nbNewOrders: 0, pendingOrders: [] })
             )
-            .then(({ revenue, nbPendingOrders, pendingOrders }) => {
+            .then(({ revenue, nbNewOrders, pendingOrders }) => {
                 this.setState({
                     revenue: revenue.toLocaleString(undefined, {
                         style: 'currency',
                         currency: 'USD',
                         maximumFractionDigits: 0,
                     }),
-                    nbPendingOrders,
+                    nbNewOrders,
                     pendingOrders,
                 });
                 return pendingOrders;
@@ -94,21 +95,35 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { revenue, nbPendingOrders, nbPendingReviews, nbNewCustomers, pendingOrders, pendingOrdersCustomers, pendingReviews, pendingReviewsCustomers, newCustomers } = this.state;
+        const {
+            nbNewCustomers,
+            nbNewOrders,
+            nbPendingReviews,
+            newCustomers,
+            pendingOrders,
+            pendingOrdersCustomers,
+            pendingReviews,
+            pendingReviewsCustomers,
+            revenue,
+        } = this.state;
         return (
             <div style={styles.main}>
                 <Welcome style={styles.welcome} />
-                <div style={styles.bar}>
-                    <MonthlyRevenue value={revenue} />
-                    <NbPendingOrders value={nbPendingOrders} />
-                    <NbPendingReviews value={nbPendingReviews} />
-                    <NbNewCustomers value={nbNewCustomers} />
-                </div>
-                <div style={styles.data}>
-                    <PendingOrders orders={pendingOrders} customers={pendingOrdersCustomers} />
-                    <div style={styles.data2}>
-                        <PendingReviews reviews={pendingReviews} customers={pendingReviewsCustomers} />
-                        <NewCustomers visitors={newCustomers} />
+                <div style={styles.flex}>
+                    <div style={styles.leftCol}>
+                        <div style={styles.flex}>
+                            <MonthlyRevenue value={revenue} />
+                            <NbNewOrders value={nbNewOrders} />
+                        </div>
+                        <div style={styles.singleCol}>
+                            <PendingOrders orders={pendingOrders} customers={pendingOrdersCustomers} />
+                        </div>
+                    </div>
+                    <div style={styles.rightCol}>
+                        <div style={styles.flex}>
+                            <PendingReviews nb={nbPendingReviews} reviews={pendingReviews} customers={pendingReviewsCustomers} />
+                            <NewCustomers nb={nbNewCustomers} visitors={newCustomers} />
+                        </div>
                     </div>
                 </div>
             </div>
