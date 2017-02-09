@@ -21,6 +21,7 @@ import {
 } from 'admin-on-rest/lib/mui';
 
 import Icon from 'material-ui/svg-icons/social/person';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
 import EditButton from '../buttons/EditButton';
 import NbItemsField from '../commands/NbItemsField';
@@ -57,13 +58,13 @@ ArrayField.defaultProps = {
     addLabel: true,
 };
 
-const rowStyle = (record, index) => ({
-    backgroundColor: index % 2 ? '#eee' : 'white',
-})
+const rowStyle = muiTheme => (record, index) => ({
+    backgroundColor: index % 2 ? muiTheme.tableRow.stripeColor : muiTheme.table.backgroundColor,
+});
 
-export const VisitorList = (props) => (
+export const VisitorList = muiThemeable()((props) => (
     <List {...props} filters={<VisitorFilter />} sort={{ field: 'last_seen', order: 'DESC' }} perPage={25}>
-        <Datagrid rowStyle={rowStyle}>
+        <Datagrid rowStyle={rowStyle(props.muiTheme)}>
             <FullNameField />
             <DateField source="last_seen" type="date" />
             <NumberField source="nb_commands" label="Commands" style={{ color: 'purple' }} />
@@ -74,7 +75,7 @@ export const VisitorList = (props) => (
             <EditButton />
         </Datagrid>
     </List>
-);
+));
 
 const VisitorTitle = ({ record }) => record ? <FullNameField record={record} size={32} /> : null;
 
