@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "admin-on-rest": "~0.7.0",
-    "aor-language-french": "^1.4.0",
+    "aor-language-french": "^1.5.0",
     "aor-rich-text-input": "^1.0.0",
     "material-ui": "~0.16.4",
     "react": "~15.4.0",

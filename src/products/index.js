@@ -30,15 +30,15 @@ const QuickFilter = ({ label }) => <Chip>{ label }</Chip>;
 
 export const ProductFilter = props => (
     <Filter {...props}>
-        <TextInput label="Search" source="q" alwaysOn />
-        <ReferenceInput label="Category" source="category_id" reference="categories">
+        <TextInput label="pos.search" source="q" alwaysOn />
+        <ReferenceInput source="category_id" reference="categories">
             <SelectInput source="name" />
         </ReferenceInput>
-        <NumberInput label="Min width" source="width_gte" />
-        <NumberInput label="Max width" source="width_lte" />
-        <NumberInput label="Min height" source="height_gte" />
-        <NumberInput label="Max height" source="height_lte" />
-        <QuickFilter label="Low Stock" source="stock_lte" defaultValue={10} />
+        <NumberInput source="width_gte" />
+        <NumberInput source="width_lte" />
+        <NumberInput source="height_gte" />
+        <NumberInput source="height_lte" />
+        <QuickFilter source="stock_lte" defaultValue={10} />
     </Filter>
 );
 
@@ -52,25 +52,25 @@ const ProductTitle = ({ record }) => <span>Poster #{record.reference}</span>;
 export const ProductEdit = (props) => (
     <Edit {...props} title={<ProductTitle />}>
         <TabbedForm>
-            <FormTab label="Image">
+            <FormTab label="resources.products.tabs.image">
                 <Poster />
                 <TextInput source="image" options={{ fullWidth: true }} />
                 <TextInput source="thumbnail" options={{ fullWidth: true }} />
             </FormTab>
-            <FormTab label="Details">
+            <FormTab label="resources.products.tabs.details">
                 <TextInput source="reference" />
                 <NumberInput source="price" elStyle={{ width: '5em' }} />
                 <NumberInput source="width" style={{ display: 'inline-block' }} elStyle={{ width: '5em' }} />
                 <NumberInput source="height" style={{ display: 'inline-block', marginLeft: 32 }} elStyle={{ width: '5em' }} />
-                <ReferenceInput label="Category" source="category_id" reference="categories">
+                <ReferenceInput source="category_id" reference="categories">
                     <SelectInput source="name" />
                 </ReferenceInput>
                 <NumberInput source="stock" elStyle={{ width: '5em' }} />
             </FormTab>
-            <FormTab label="Description">
+            <FormTab label="resources.products.tabs.description">
                 <RichTextInput source="description" addLabel={false}/>
             </FormTab>
-            <FormTab label="Reviews">
+            <FormTab label="resources.products.tabs.reviews">
                 <ReferenceManyField reference="reviews" target="product_id" addLabel={false}>
                     <Datagrid>
                         <DateField source="date" />

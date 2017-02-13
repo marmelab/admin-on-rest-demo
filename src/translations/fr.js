@@ -65,6 +65,27 @@ export default {
         },
         products: {
             name: 'Poster |||| Posters',
+            fields: {
+                category_id: 'Catégorie',
+                height_gte: 'Hauteur mini',
+                height_lte: 'Hauteur maxi',
+                height: 'Hauteur',
+                image: 'Photo',
+                price: 'Prix',
+                reference: 'Référence',
+                stock_lte: 'Stock faible',
+                stock: 'Stock',
+                thumbnail: 'Aperçu',
+                width_gte: 'Largeur mini',
+                width_lte: 'Margeur maxi',
+                width: 'Largeur',
+            },
+            tabs: {
+                image: 'Image',
+                details: 'Détails',
+                description: 'Description',
+                reviews: 'Commentaires',
+            },
         },
         categories: {
             name: 'Catégorie |||| Catégories',
