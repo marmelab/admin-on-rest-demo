@@ -45,7 +45,6 @@ class App extends Component {
                 loginPage={Login}
                 appLayout={Layout}
                 messages={translations}
-                locale="fr"
             >
                 <Resource name="customers" list={VisitorList} edit={VisitorEdit} remove={VisitorDelete} icon={VisitorIcon} />
                 <Resource name="commands" list={CommandList} edit={CommandEdit} remove={Delete} icon={CommandIcon} options={{ label: 'Orders' }}/>
