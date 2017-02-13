@@ -10,6 +10,7 @@ import {
     TextField,
     TextInput,
 } from 'admin-on-rest/lib/mui';
+import { translate } from 'admin-on-rest';
 import Icon from 'material-ui/svg-icons/action/bookmark';
 
 import ThumbnailField from '../products/ThumbnailField';
@@ -28,12 +29,13 @@ export const CategoryList = (props) => (
     </List>
 );
 
-const CategoryTitle = ({ record }) => <span>Category "{record.name}"</span>;
+const CategoryTitle = translate(({ record, translate }) => <span>{translate('resources.categories.name', { smart_count: 1 })} "{record.name}"</span>);
+
 export const CategoryEdit = (props) => (
     <Edit title={<CategoryTitle />} {...props}>
         <SimpleForm>
             <TextInput source="name" />
-            <ReferenceManyField reference="products" target="category_id" label="Orders" perPage={5}>
+            <ReferenceManyField reference="products" target="category_id" label="resources.categories.fields.products" perPage={5}>
                 <Datagrid>
                     <ThumbnailField />
                     <ProductRefField source="reference" />
