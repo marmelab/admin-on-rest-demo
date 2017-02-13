@@ -29,20 +29,20 @@ export const ReviewIcon = Icon;
 
 export const ReviewFilter = (props) => (
     <Filter {...props}>
-        <TextInput label="Search" source="q" alwaysOn />
+        <TextInput label="pos.search" source="q" alwaysOn />
         <SelectInput source="status" choices={[
             { id: 'accepted', name: 'Accepted' },
             { id: 'pending', name: 'Pending' },
             { id: 'rejected', name: 'Rejected' },
         ]} />
-        <ReferenceInput label="Customer" source="customer_id" reference="customers">
+        <ReferenceInput source="customer_id" reference="customers">
             <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
         </ReferenceInput>
-        <ReferenceInput label="Product" source="product_id" reference="products">
+        <ReferenceInput source="product_id" reference="products">
             <AutocompleteInput optionText="reference" />
         </ReferenceInput>
-        <DateInput label="Posted since" source="date_gte" />
-        <DateInput label="Posted before" source="date_lte" />
+        <DateInput source="date_gte" />
+        <DateInput source="date_lte" />
     </Filter>
 );
 
@@ -68,7 +68,7 @@ export const ReviewEdit = (props) => (
             <DateField source="date" style={detailStyle} />
             <CustomerReferenceField style={detailStyle} />
             <ProductReferenceField style={detailStyle} />
-            <ReferenceField source="command_id" reference="commands" label="Order" addLabel style={detailStyle}>
+            <ReferenceField source="command_id" reference="commands" addLabel style={detailStyle}>
                 <TextField source="reference" />
             </ReferenceField>
             <StarRatingField style={detailStyle} />

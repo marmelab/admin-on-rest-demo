@@ -108,11 +108,11 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-const enhanced = compose(
+const enhance = compose(
     translate,
     connect(mapStateToProps, {
         crudGetMany: crudGetManyAction,
     })
 );
 
-export default enhanced(Basket);
+export default enhance(Basket);

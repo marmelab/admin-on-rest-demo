@@ -2,6 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
+import { translate } from 'admin-on-rest';
+import compose from 'recompose/compose';
 import { reviewReject as reviewRejectAction } from './reviewActions';
 
 class AcceptButton extends Component {
@@ -11,10 +13,10 @@ class AcceptButton extends Component {
     }
 
     render() {
-        const { record } = this.props;
+        const { record, translate } = this.props;
         return record && record.status === 'pending' ? <FlatButton
             primary
-            label="Reject"
+            label={translate('resources.reviews.action.reject')}
             onClick={this.handleApprove}
             icon={<ThumbDown color="#FF5722" />}
         /> : <span/>;
@@ -24,8 +26,14 @@ class AcceptButton extends Component {
 AcceptButton.propTypes = {
     record: PropTypes.object,
     reviewReject: PropTypes.func,
+    translate: PropTypes.func,
 };
 
-export default connect(null, {
-    reviewReject: reviewRejectAction,
-})(AcceptButton);
+const enhance = compose(
+    translate,
+    connect(null, {
+        reviewReject: reviewRejectAction,
+    })
+);
+
+export default enhance(AcceptButton);

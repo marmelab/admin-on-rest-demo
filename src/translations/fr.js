@@ -96,6 +96,27 @@ export default {
         },
         reviews: {
             name: 'Commentaire |||| Commentaires',
+            fields: {
+                customer_id: 'Client',
+                command_id: 'Commande',
+                product_id: 'Produit',
+                date_gte: 'Publié depuis',
+                date_lte: 'Publié avant',
+                date: 'Date',
+                comment: 'Texte',
+                status: 'Statut',
+                rating: 'Classement',
+            },
+            action: {
+                accept: 'Accepter',
+                reject: 'Rejeter',
+            },
+            notification: {
+                approved_success: 'Commentaire approuvé',
+                approved_error: 'Erreur: Commentaire non approuvé',
+                rejected_success: 'Commentaire rejeté',
+                rejected_error: 'Erreur: Commentaire non rejeté',
+            },
         },
     },
 };

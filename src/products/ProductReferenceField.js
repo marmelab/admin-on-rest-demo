@@ -7,9 +7,8 @@ const ProductReferenceField = (props) => (
     </ReferenceField>
 )
 ProductReferenceField.defaultProps = {
-    label: 'Product',
     source: 'product_id',
-    addLabel: true, 
+    addLabel: true,
 };
 
 export default ProductReferenceField;

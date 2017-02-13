@@ -80,6 +80,26 @@ export default {
         },
         reviews: {
             name: 'Review |||| Reviews',
+            fields: {
+                customer_id: 'Customer',
+                command_id: 'Order',
+                product_id: 'Product',
+                date_gte: 'Posted since',
+                date_lte: 'Posted before',
+                date: 'Date',
+                comment: 'Comment',
+                rating: 'Rating',
+            },
+            action: {
+                accept: 'Accept',
+                reject: 'Reject',
+            },
+            notification: {
+                approved_success: 'Review approved',
+                approved_error: 'Error: Review not approved',
+                rejected_success: 'Review rejected',
+                rejected_error: 'Error: Review not rejected',
+            },
         },
     },
 };
