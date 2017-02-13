@@ -9,7 +9,8 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
-import { crudGetMany as crudGetManyAction } from 'admin-on-rest';
+import { translate, crudGetMany as crudGetManyAction } from 'admin-on-rest';
+import compose from 'recompose/compose';
 
 class Basket extends Component {
     componentDidMount() {
@@ -20,17 +21,25 @@ class Basket extends Component {
         crudGetMany('products', basket.map(item => item.product_id));
     }
     render() {
-        const { record, products } = this.props;
+        const { record, products, translate } = this.props;
         const { basket } = record;
         return (
             <Paper style={{ width: '42em', float: 'right' }} zDepth={2}>
                 <Table selectable={false}>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>
-                            <TableHeaderColumn>Reference</TableHeaderColumn>
-                            <TableHeaderColumn style={{ textAlign: 'right' }}>Unit Price</TableHeaderColumn>
-                            <TableHeaderColumn style={{ textAlign: 'right' }}>Quantity</TableHeaderColumn>
-                            <TableHeaderColumn style={{ textAlign: 'right' }}>Total</TableHeaderColumn>
+                            <TableHeaderColumn>
+                                {translate('resources.commands.fields.basket.reference')}
+                            </TableHeaderColumn>
+                            <TableHeaderColumn style={{ textAlign: 'right' }}>
+                                {translate('resources.commands.fields.basket.unit_price')}
+                            </TableHeaderColumn>
+                            <TableHeaderColumn style={{ textAlign: 'right' }}>
+                                {translate('resources.commands.fields.basket.quantity')}
+                            </TableHeaderColumn>
+                            <TableHeaderColumn style={{ textAlign: 'right' }}>
+                                {translate('resources.commands.fields.basket.total')}
+                            </TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody displayRowCheckbox={false}>
@@ -52,28 +61,28 @@ class Basket extends Component {
                         )}
                         <TableRow>
                             <TableRowColumn colSpan={2} />
-                            <TableRowColumn>Sum</TableRowColumn>
+                            <TableRowColumn>{translate('resources.commands.fields.basket.sum')}</TableRowColumn>
                             <TableRowColumn style={{ textAlign: 'right' }}>
                                 {record.total_ex_taxes.toLocaleString(undefined, { style: 'currency', currency: 'USD' })}
                             </TableRowColumn>
                         </TableRow>
                         <TableRow>
                             <TableRowColumn colSpan={2} />
-                            <TableRowColumn>Delivery</TableRowColumn>
+                            <TableRowColumn>{translate('resources.commands.fields.basket.delivery')}</TableRowColumn>
                             <TableRowColumn style={{ textAlign: 'right' }}>
                                 {record.delivery_fees.toLocaleString(undefined, { style: 'currency', currency: 'USD' })}
                             </TableRowColumn>
                         </TableRow>
                         <TableRow>
                             <TableRowColumn colSpan={2} />
-                            <TableRowColumn>Tax Rate</TableRowColumn>
+                            <TableRowColumn>{translate('resources.commands.fields.basket.tax_rate')}</TableRowColumn>
                             <TableRowColumn style={{ textAlign: 'right' }}>
                                 {record.tax_rate.toLocaleString(undefined, { style: 'percent' })}
                             </TableRowColumn>
                         </TableRow>
                         <TableRow>
                             <TableRowColumn colSpan={2} />
-                            <TableRowColumn style={{ fontWeight: 'bold' }}>Total</TableRowColumn>
+                            <TableRowColumn style={{ fontWeight: 'bold' }}>{translate('resources.commands.fields.basket.total')}</TableRowColumn>
                             <TableRowColumn style={{ textAlign: 'right', fontWeight: 'bold' }}>
                                 {record.total.toLocaleString(undefined, { style: 'currency', currency: 'USD' })}
                             </TableRowColumn>
@@ -99,8 +108,11 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-const ConnectedBasket = connect(mapStateToProps, {
-    crudGetMany: crudGetManyAction,
-})(Basket);
+const enhanced = compose(
+    translate,
+    connect(mapStateToProps, {
+        crudGetMany: crudGetManyAction,
+    })
+);
 
-export default ConnectedBasket;
+export default enhanced(Basket);

@@ -19,6 +19,7 @@ import {
     TextField,
     TextInput,
 } from 'admin-on-rest/lib/mui';
+import { translate } from 'admin-on-rest';
 
 import Icon from 'material-ui/svg-icons/social/person';
 import muiThemeable from 'material-ui/styles/muiThemeable';
@@ -34,11 +35,11 @@ export const VisitorIcon = Icon;
 
 const VisitorFilter = (props) => (
     <Filter {...props}>
-        <TextInput label="Search" source="q" alwaysOn />
-        <DateInput label="Visited Since" source="last_seen_gte" />
+        <TextInput label="pos.search" source="q" alwaysOn />
+        <DateInput source="last_seen_gte" />
         <NullableBooleanInput source="has_ordered" />
         <NullableBooleanInput source="has_newsletter" defaultValue={true} />
-        <SelectInput label="Segments" source="groups" choices={segments} />
+        <SelectInput source="groups" choices={segments} />
     </Filter>
 );
 
@@ -67,7 +68,7 @@ export const VisitorList = muiThemeable()((props) => (
         <Datagrid rowStyle={rowStyle(props.muiTheme)}>
             <FullNameField />
             <DateField source="last_seen" type="date" />
-            <NumberField source="nb_commands" label="Commands" style={{ color: 'purple' }} />
+            <NumberField source="nb_commands" label="resources.customers.fields.commands" style={{ color: 'purple' }} />
             <ColoredNumberField source="total_spent" options={{ style: 'currency', currency: 'USD' }} />
             <DateField source="latest_purchase" showTime />
             <BooleanField source="has_newsletter" label="News." />
@@ -82,18 +83,18 @@ const VisitorTitle = ({ record }) => record ? <FullNameField record={record} siz
 export const VisitorEdit = (props) => (
     <Edit title={<VisitorTitle />} {...props}>
         <TabbedForm>
-            <FormTab label="Identity">
+            <FormTab label="resources.customers.tabs.identity">
                 <TextInput source="first_name" style={{ display: 'inline-block' }} />
                 <TextInput source="last_name" style={{ display: 'inline-block', marginLeft: 32 }} />
                 <TextInput type="email" source="email" validation={{ email: true }} options={{ fullWidth: true }} style={{ width: 544 }} />
                 <DateInput source="birthday" />
             </FormTab>
-            <FormTab label="Address">
-                <LongTextInput source="address" label="Street" style={{ maxWidth: 544 }} />
+            <FormTab label="resources.customers.tabs.address">
+                <LongTextInput source="address" style={{ maxWidth: 544 }} />
                 <TextInput source="zipcode" style={{ display: 'inline-block' }} />
                 <TextInput source="city" style={{ display: 'inline-block', marginLeft: 32 }} />
             </FormTab>
-            <FormTab label="Orders">
+            <FormTab label="resources.customers.tabs.orders">
                 <ReferenceManyField addLabel={false} reference="commands" target="customer_id">
                     <Datagrid>
                         <DateField source="date" />
@@ -105,7 +106,7 @@ export const VisitorEdit = (props) => (
                     </Datagrid>
                 </ReferenceManyField>
             </FormTab>
-            <FormTab label="Reviews">
+            <FormTab label="resources.customers.tabs.reviews">
                 <ReferenceManyField addLabel={false} reference="reviews" target="customer_id">
                     <Datagrid filter={{ status: 'approved' }}>
                         <DateField source="date" />
@@ -116,7 +117,7 @@ export const VisitorEdit = (props) => (
                     </Datagrid>
                 </ReferenceManyField>
             </FormTab>
-            <FormTab label="Stats">
+            <FormTab label="resources.customers.tabs.stats">
                 <ArrayField source="groups" label="Segments" />
                 <NullableBooleanInput source="has_newsletter" />
                 <DateField source="first_seen" style={{ width: 128, display: 'inline-block' }} />
@@ -127,10 +128,10 @@ export const VisitorEdit = (props) => (
     </Edit>
 );
 
-const VisitorDeleteTitle = ({ record }) => <span>
-    Delete customer
+const VisitorDeleteTitle = translate(({ record, translate }) => <span>
+    {translate('resources.customers.page.delete')}&nbsp;
     {record && <img src={`${record.avatar}?size=25x25`} width="25" role="presentation" />}
-    {record && `${record.first_name} ${record.last_name}?`}
-</span>;
+    {record && `${record.first_name} ${record.last_name}`}
+</span>);
 
 export const VisitorDelete = (props) => <Delete {...props} title={<VisitorDeleteTitle />} />;

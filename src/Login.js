@@ -14,7 +14,7 @@ import TextField from 'material-ui/TextField';
 import LockIcon from 'material-ui/svg-icons/action/lock-outline';
 import { cyan500, pinkA200 } from 'material-ui/styles/colors';
 
-import { AUTH_LOGIN, Translate } from 'admin-on-rest';
+import { AUTH_LOGIN, translate } from 'admin-on-rest';
 
 const styles = {
     main: {
@@ -135,7 +135,7 @@ Login.defaultProps = {
 };
 
 const enhance = compose(
-    Translate,
+    translate,
     reduxForm({
         form: 'signIn',
         validate: (values, props) => {

@@ -12,7 +12,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import inflection from 'inflection';
 
 import { AppBar, Notification, defaultTheme } from 'admin-on-rest/lib/mui';
-import { Translate } from 'admin-on-rest';
+import { translate } from 'admin-on-rest';
 
 injectTapEventPlugin();
 
@@ -39,6 +39,16 @@ const styles = {
     },
 };
 
+
+const translatedResourceName = (resource, translate) =>
+    translate(`resources.${resource.name}.name`, {
+        smart_count: 2,
+        _: translate(resource.options.label, {
+            smart_count: 2,
+            _: inflection.humanize(inflection.pluralize(resource.name)),
+        }),
+    });
+
 const Layout = ({ isLoading, children, route, title, theme, logout, translate }) => {
     const muiTheme = getMuiTheme(theme);
     const prefix = autoprefixer(muiTheme);
@@ -56,7 +66,7 @@ const Layout = ({ isLoading, children, route, title, theme, logout, translate })
                                     <ListItem
                                         key={resource.name}
                                         containerElement={<Link to={`/${resource.name}`} />}
-                                        primaryText={translate(resource.options.label || inflection.humanize(inflection.pluralize(resource.name)))}
+                                        primaryText={translatedResourceName(resource, translate)}
                                         leftIcon={<resource.icon />}
                                     />,
                                 )
@@ -95,4 +105,4 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-)(Translate(Layout));
+)(translate(Layout));

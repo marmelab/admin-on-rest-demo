@@ -8,9 +8,12 @@ const FullNameField = ({ record = {}, size = 25 }) => <span>
     {record.first_name} {record.last_name}
 </span>;
 
-FullNameField.defaultProps = {
+
+const PureFullNameField = pure(FullNameField);
+
+PureFullNameField.defaultProps = {
     source: 'last_name',
-    label: 'Name',
+    label: 'resources.customers.fields.name',
 };
 
-export default pure(FullNameField);
+export default PureFullNameField;

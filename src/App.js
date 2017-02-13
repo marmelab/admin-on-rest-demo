@@ -12,6 +12,8 @@ import Login from './Login';
 import Layout from './Layout';
 import { Dashboard } from './dashboard';
 import CustomRoutes from './routes';
+import translations from './translations';
+
 import { VisitorList, VisitorEdit, VisitorDelete, VisitorIcon } from './visitors';
 import { CommandList, CommandEdit, CommandIcon } from './commands';
 import { ProductList, ProductEdit, ProductIcon } from './products';
@@ -42,6 +44,8 @@ class App extends Component {
                 dashboard={Dashboard}
                 loginPage={Login}
                 appLayout={Layout}
+                messages={translations}
+                locale="fr"
             >
                 <Resource name="customers" list={VisitorList} edit={VisitorEdit} remove={VisitorDelete} icon={VisitorIcon} />
                 <Resource name="commands" list={CommandList} edit={CommandEdit} remove={Delete} icon={CommandIcon} options={{ label: 'Orders' }}/>

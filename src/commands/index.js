@@ -18,6 +18,7 @@ import {
     TextField,
     TextInput,
 } from 'admin-on-rest/lib/mui';
+import { translate } from 'admin-on-rest';
 import Icon from 'material-ui/svg-icons/editor/attach-money';
 
 import Basket from './Basket';
@@ -28,8 +29,8 @@ export const CommandIcon = Icon;
 
 const CommandFilter = (props) => (
     <Filter {...props}>
-        <TextInput label="Search" source="q" alwaysOn />
-        <ReferenceInput label="Customer" source="customer_id" reference="customers">
+        <TextInput label="pos.search" source="q" alwaysOn />
+        <ReferenceInput source="customer_id" reference="customers">
             <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
         </ReferenceInput>
         <SelectInput source="status" choices={[
@@ -37,15 +38,15 @@ const CommandFilter = (props) => (
             { id: 'ordered', name: 'ordered' },
             { id: 'cancelled', name: 'cancelled' },
         ]} />
-        <DateInput label="Passed Since" source="date_gte" />
-        <DateInput label="Passed Before" source="date_lte" />
-        <TextInput label="Min Amount" source="total_gte" />
+        <DateInput source="date_gte" />
+        <DateInput source="date_lte" />
+        <TextInput source="total_gte" />
         <NullableBooleanInput source="returned" />
     </Filter>
 );
 
 export const CommandList = (props) => (
-    <List {...props} filters={<CommandFilter />} sort={{ field: 'date', order: 'DESC' }} perPage={25} title="Orders">
+    <List {...props} filters={<CommandFilter />} sort={{ field: 'date', order: 'DESC' }} perPage={25}>
         <Datagrid >
             <DateField source="date" showTime />
             <TextField source="reference" />
@@ -59,13 +60,14 @@ export const CommandList = (props) => (
     </List>
 );
 
-const CommandTitle = ({ record }) => <span>Order #{record.reference}</span>;
-export const CommandEdit = (props) => (
-    <Edit title={<CommandTitle />} {...props}>
+const CommandTitle = translate(({ record, translate }) => <span>{translate('resources.commands.name', { smart_count: 1 })} #{record.reference}</span>);
+
+export const CommandEdit = translate(({ translate, ...rest }) => (
+    <Edit title={<CommandTitle />} {...rest}>
         <SimpleForm>
             <Basket />
             <DateInput source="date" />
-            <ReferenceInput label="Customer" source="customer_id" reference="customers">
+            <ReferenceInput source="customer_id" reference="customers">
                 <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
             </ReferenceInput>
             <SelectInput source="status" choices={[
@@ -77,4 +79,4 @@ export const CommandEdit = (props) => (
             <div style={{ clear: 'both' }} />
         </SimpleForm>
     </Edit>
-);
+));
