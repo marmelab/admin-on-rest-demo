@@ -8,13 +8,10 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import autoprefixer from 'material-ui/utils/autoprefixer';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import inflection from 'inflection';
 
 import { AppBar, Notification, defaultTheme } from 'admin-on-rest/lib/mui';
 import { translate } from 'admin-on-rest';
-
-injectTapEventPlugin();
 
 const styles = {
     main: {
