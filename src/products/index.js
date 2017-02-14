@@ -15,6 +15,7 @@ import {
     TextField,
     TextInput,
 } from 'admin-on-rest/lib/mui';
+import { translate } from 'admin-on-rest';
 import Icon from 'material-ui/svg-icons/image/collections';
 import Chip from 'material-ui/Chip';
 import RichTextInput from 'aor-rich-text-input';
@@ -26,7 +27,7 @@ import Poster from './Poster';
 
 export const ProductIcon = Icon;
 
-const QuickFilter = ({ label }) => <Chip>{ label }</Chip>;
+const QuickFilter = translate(({ label, translate }) => <Chip>{translate(label)}</Chip>);
 
 export const ProductFilter = props => (
     <Filter {...props}>
@@ -38,7 +39,7 @@ export const ProductFilter = props => (
         <NumberInput source="width_lte" />
         <NumberInput source="height_gte" />
         <NumberInput source="height_lte" />
-        <QuickFilter source="stock_lte" defaultValue={10} />
+        <QuickFilter label="resources.products.fields.stock_lte" source="stock_lte" defaultValue={10} />
     </Filter>
 );
 
