@@ -7,11 +7,18 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import autoprefixer from 'material-ui/utils/autoprefixer';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
+import LabelIcon from 'material-ui/svg-icons/action/label';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import inflection from 'inflection';
 
 import { AppBar, Notification, defaultTheme } from 'admin-on-rest/lib/mui';
 import { translate } from 'admin-on-rest';
+
+import { VisitorIcon } from './visitors';
+import { CommandIcon } from './commands';
+import { ProductIcon } from './products';
+import { CategoryIcon } from './categories';
+import { ReviewIcon } from './reviews';
 
 const styles = {
     main: {
@@ -36,15 +43,14 @@ const styles = {
     },
 };
 
-
-const translatedResourceName = (resource, translate) =>
-    translate(`resources.${resource.name}.name`, {
-        smart_count: 2,
-        _: translate(resource.options.label, {
-            smart_count: 2,
-            _: inflection.humanize(inflection.pluralize(resource.name)),
-        }),
-    });
+const items = [
+    { name: 'customers', icon: <VisitorIcon /> },
+    { name: 'segments', icon: <LabelIcon /> },
+    { name: 'commands', icon: <CommandIcon /> },
+    { name: 'products', icon: <ProductIcon /> },
+    { name: 'categories', icon: <CategoryIcon /> },
+    { name: 'reviews', icon: <ReviewIcon /> },
+];
 
 const Layout = ({ isLoading, children, route, title, theme, logout, translate }) => {
     const muiTheme = getMuiTheme(theme);
@@ -57,20 +63,17 @@ const Layout = ({ isLoading, children, route, title, theme, logout, translate })
                     <div style={styles.content}>{children}</div>
                     <Paper style={styles.menu}>
                         <List>
-                            {route.resources
-                                .filter(r => r.list)
-                                .map(resource =>
-                                    <ListItem
-                                        key={resource.name}
-                                        containerElement={<Link to={`/${resource.name}`} />}
-                                        primaryText={translatedResourceName(resource, translate)}
-                                        leftIcon={<resource.icon />}
-                                    />,
-                                )
-                            }
+                            {items.map(item => (
+                                <ListItem
+                                    key={item.name}
+                                    containerElement={<Link to={`/${item.name}`} />}
+                                    primaryText={translate(`resources.${item.name}.name`, { smart_count: 2 })}
+                                    leftIcon={item.icon}
+                                />
+                            ))}
                             <ListItem
                                 containerElement={<Link to="/configuration" />}
-                                primaryText="Configuration"
+                                primaryText={translate('pos.configuration')}
                                 leftIcon={<SettingsIcon />}
                             />
                         </List>
