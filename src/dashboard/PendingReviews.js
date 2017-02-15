@@ -3,6 +3,7 @@ import { Card, CardTitle } from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import CommentIcon from 'material-ui/svg-icons/communication/comment';
 import Avatar from 'material-ui/Avatar';
+import { translate } from 'admin-on-rest';
 
 import StarRatingField from '../reviews/StarRatingField';
 
@@ -11,10 +12,10 @@ const styles = {
     icon: { float: 'right', width: 64, height: 64, padding: 16, color: '#f44336' },
 };
 
-export default ({ reviews = [], customers = {}, nb }) => (
+export default translate(({ reviews = [], customers = {}, nb, translate }) => (
     <Card style={styles.card}>
         <CommentIcon style={styles.icon} />
-        <CardTitle title={nb} subtitle="Pending Reviews" />
+        <CardTitle title={nb} subtitle={translate('pos.dashboard.pending_reviews')} />
         <List>
             {reviews.map(record =>
                 <ListItem
@@ -28,4 +29,4 @@ export default ({ reviews = [], customers = {}, nb }) => (
             )}
         </List>
     </Card>
-);
+));

@@ -2,12 +2,13 @@ import React from 'react';
 import { Card, CardTitle } from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
+import { translate } from 'admin-on-rest';
 
 const style = { flex: 1 };
 
-export default ({ orders = [], customers = {} }) => (
+export default translate(({ orders = [], customers = {}, translate }) => (
     <Card style={style}>
-        <CardTitle title="Pending Orders" />
+        <CardTitle title={translate('pos.dashboard.pending_orders')} />
         <List>
             {orders.map(record =>
                 <ListItem
@@ -16,8 +17,11 @@ export default ({ orders = [], customers = {} }) => (
                     primaryText={new Date(record.date).toLocaleString('en-GB')}
                     secondaryText={
                         <p>
-                            {customers[record.customer_id] ? `by ${customers[record.customer_id].first_name} ${customers[record.customer_id].last_name}, ` : null}
-                            {record.basket.length} items
+                            {translate('pos.dashboard.order.items', {
+                                smart_count: record.basket.length,
+                                nb_items: record.basket.length,
+                                customer_name: customers[record.customer_id] ? `${customers[record.customer_id].first_name} ${customers[record.customer_id].last_name}` : ''
+                            })}
                         </p>
                     }
                     rightAvatar={<strong>{record.total}$</strong>}
@@ -26,4 +30,4 @@ export default ({ orders = [], customers = {} }) => (
             )}
         </List>
     </Card>
-);
+));
