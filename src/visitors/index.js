@@ -1,8 +1,6 @@
 import React from 'react';
 import {
     BooleanField,
-    ChipField,
-    SelectInput,
     Datagrid,
     DateField,
     DateInput,
@@ -30,7 +28,7 @@ import ProductReferenceField from '../products/ProductReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
 import FullNameField from './FullNameField';
 import SegmentsField from './SegmentsField';
-import segments from './segments';
+import SegmentsInput from './SegmentsInput';
 
 export const VisitorIcon = Icon;
 
@@ -40,7 +38,7 @@ const VisitorFilter = (props) => (
         <DateInput source="last_seen_gte" />
         <NullableBooleanInput source="has_ordered" />
         <NullableBooleanInput source="has_newsletter" defaultValue={true} />
-        <SelectInput source="groups" choices={segments} />
+        <SegmentsInput />
     </Filter>
 );
 
