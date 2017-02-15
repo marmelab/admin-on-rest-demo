@@ -12,7 +12,7 @@ import Login from './Login';
 import Layout from './Layout';
 import { Dashboard } from './dashboard';
 import CustomRoutes from './routes';
-import translations from './translations';
+import translations from './i18n';
 
 import { VisitorList, VisitorEdit, VisitorDelete, VisitorIcon } from './visitors';
 import { CommandList, CommandEdit, CommandIcon } from './commands';
