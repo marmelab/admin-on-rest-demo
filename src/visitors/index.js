@@ -29,6 +29,7 @@ import NbItemsField from '../commands/NbItemsField';
 import ProductReferenceField from '../products/ProductReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
 import FullNameField from './FullNameField';
+import SegmentsField from './SegmentsField';
 import segments from './segments';
 
 export const VisitorIcon = Icon;
@@ -50,15 +51,6 @@ const colored = WrappedComponent => props => props.record[props.source] > 500 ?
 const ColoredNumberField = colored(NumberField);
 ColoredNumberField.defaultProps = NumberField.defaultProps;
 
-const ArrayField = ({ record, source, Renderer = ChipField }) => (
-    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {record[source].map(value => <Renderer key={value} record={{ value }} source="value" />)}
-    </div>
-);
-ArrayField.defaultProps = {
-    addLabel: true,
-};
-
 const rowStyle = muiTheme => (record, index) => ({
     backgroundColor: index % 2 ? muiTheme.tableRow.stripeColor : muiTheme.table.backgroundColor,
 });
@@ -72,7 +64,7 @@ export const VisitorList = muiThemeable()((props) => (
             <ColoredNumberField source="total_spent" options={{ style: 'currency', currency: 'USD' }} />
             <DateField source="latest_purchase" showTime />
             <BooleanField source="has_newsletter" label="News." />
-            <ArrayField source="groups" label="Segments" />
+            <SegmentsField />
             <EditButton />
         </Datagrid>
     </List>
@@ -118,7 +110,7 @@ export const VisitorEdit = (props) => (
                 </ReferenceManyField>
             </FormTab>
             <FormTab label="resources.customers.tabs.stats">
-                <ArrayField source="groups" label="Segments" />
+                <SegmentsField />
                 <NullableBooleanInput source="has_newsletter" />
                 <DateField source="first_seen" style={{ width: 128, display: 'inline-block' }} />
                 <DateField source="latest_purchase" style={{ width: 128, display: 'inline-block' }} />
