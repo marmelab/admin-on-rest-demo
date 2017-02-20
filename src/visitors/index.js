@@ -20,7 +20,6 @@ import {
 import { translate } from 'admin-on-rest';
 
 import Icon from 'material-ui/svg-icons/social/person';
-import muiThemeable from 'material-ui/styles/muiThemeable';
 
 import EditButton from '../buttons/EditButton';
 import NbItemsField from '../commands/NbItemsField';

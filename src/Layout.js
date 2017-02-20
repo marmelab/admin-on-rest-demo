@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import { List, ListItem } from 'material-ui/List';
@@ -9,7 +9,6 @@ import autoprefixer from 'material-ui/utils/autoprefixer';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import LabelIcon from 'material-ui/svg-icons/action/label';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import inflection from 'inflection';
 
 import { AppBar, Notification, defaultTheme } from 'admin-on-rest/lib/mui';
 import { translate } from 'admin-on-rest';
@@ -28,18 +27,26 @@ const styles = {
     },
     body: {
         display: 'flex',
-        flex: '1',
+        flex: 1,
         backgroundColor: '#edecec',
+        overflow: 'hidden',
     },
     content: {
         flex: 1,
     },
     menu: {
-        flex: '0 0 15em',
-        order: -1,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
+        open: {
+            flex: '0 0 16em',
+            order: -1,
+            transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+            marginLeft: 0,
+        },
+        closed: {
+            flex: '0 0 16em',
+            order: -1,
+            transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+            marginLeft: '-16em',
+        },
     },
 };
 
@@ -52,38 +59,63 @@ const items = [
     { name: 'reviews', icon: <ReviewIcon /> },
 ];
 
-const Layout = ({ isLoading, children, route, title, theme, logout, translate }) => {
-    const muiTheme = getMuiTheme(theme);
-    const prefix = autoprefixer(muiTheme);
-    return (
-        <MuiThemeProvider muiTheme={muiTheme}>
-            <div style={styles.main}>
-                <AppBar title={title} isLoading={isLoading} />
-                <div className="body" style={styles.body}>
-                    <div style={styles.content}>{children}</div>
-                    <Paper style={styles.menu}>
-                        <List>
-                            {items.map(item => (
+const prefixedStyles = {};
+
+class Layout extends Component {
+    state = {
+        sidebarOpen: true,
+    };
+
+    toggleSidebar = () => {
+        this.setState({ sidebarOpen: !this.state.sidebarOpen });
+    }
+
+    render() {
+        const { isLoading, children, title, theme, logout, translate } = this.props;
+        const { sidebarOpen } = this.state;
+        const muiTheme = getMuiTheme(theme);
+        if (!prefixedStyles.main) {
+            // do this once because user agent never changes
+            const prefix = autoprefixer(muiTheme);
+            prefixedStyles.main = prefix(styles.main);
+            prefixedStyles.body = prefix(styles.body);
+            prefixedStyles.content = prefix(styles.content);
+            prefixedStyles.menu = {
+                open: prefix(styles.menu.open),
+                closed: prefix(styles.menu.closed),
+            };
+        }
+        return (
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <div style={prefixedStyles.main}>
+                    <AppBar title={title} isLoading={isLoading} onLeftIconButtonTouchTap={this.toggleSidebar} />
+
+                    <div className="body" style={prefixedStyles.body}>
+                        <div style={prefixedStyles.content}>{children}</div>
+                        <Paper style={sidebarOpen ? styles.menu.open : styles.menu.closed}>
+                            <List>
+                                {items.map(item => (
+                                    <ListItem
+                                        key={item.name}
+                                        containerElement={<Link to={`/${item.name}`} />}
+                                        primaryText={translate(`resources.${item.name}.name`, { smart_count: 2 })}
+                                        leftIcon={item.icon}
+                                    />
+                                ))}
                                 <ListItem
-                                    key={item.name}
-                                    containerElement={<Link to={`/${item.name}`} />}
-                                    primaryText={translate(`resources.${item.name}.name`, { smart_count: 2 })}
-                                    leftIcon={item.icon}
+                                    containerElement={<Link to="/configuration" />}
+                                    primaryText={translate('pos.configuration')}
+                                    leftIcon={<SettingsIcon />}
                                 />
-                            ))}
-                            <ListItem
-                                containerElement={<Link to="/configuration" />}
-                                primaryText={translate('pos.configuration')}
-                                leftIcon={<SettingsIcon />}
-                            />
-                        </List>
-                        {logout}
-                    </Paper>
+                            </List>
+                            {logout}
+                        </Paper>
+                    </div>
+                    <Notification />
                 </div>
-                <Notification />
-            </div>
-        </MuiThemeProvider>
-    );
+            </MuiThemeProvider>
+        );
+    }
 };
 
 Layout.propTypes = {
@@ -94,6 +126,10 @@ Layout.propTypes = {
     title: PropTypes.string.isRequired,
     theme: PropTypes.object.isRequired,
     translate: PropTypes.func.isRequired,
+};
+
+Layout.defaultProps = {
+    theme: defaultTheme,
 };
 
 function mapStateToProps(state) {
