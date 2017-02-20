@@ -49,13 +49,9 @@ const colored = WrappedComponent => props => props.record[props.source] > 500 ?
 const ColoredNumberField = colored(NumberField);
 ColoredNumberField.defaultProps = NumberField.defaultProps;
 
-const rowStyle = muiTheme => (record, index) => ({
-    backgroundColor: index % 2 ? muiTheme.tableRow.stripeColor : muiTheme.table.backgroundColor,
-});
-
-export const VisitorList = muiThemeable()((props) => (
+export const VisitorList = (props) => (
     <List {...props} filters={<VisitorFilter />} sort={{ field: 'last_seen', order: 'DESC' }} perPage={25}>
-        <Datagrid rowStyle={rowStyle(props.muiTheme)}>
+        <Datagrid bodyOptions={{ stripedRows: true, showRowHover: true }}>
             <FullNameField />
             <DateField source="last_seen" type="date" />
             <NumberField source="nb_commands" label="resources.customers.fields.commands" style={{ color: 'purple' }} />
@@ -66,7 +62,7 @@ export const VisitorList = muiThemeable()((props) => (
             <EditButton />
         </Datagrid>
     </List>
-));
+);
 
 const VisitorTitle = ({ record }) => record ? <FullNameField record={record} size={32} /> : null;
 
