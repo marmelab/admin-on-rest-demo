@@ -14,12 +14,12 @@ const styles = {
     icon: { float: 'right', width: 64, height: 64, padding: 16, color: '#f44336' },
 };
 
-const query = encodeURIComponent(JSON.stringify({ status: 'pending' }));
+const location = { pathname: 'reviews', query: { filter: JSON.stringify({ status: 'pending' }) } };
 
 export default translate(({ reviews = [], customers = {}, nb, translate }) => (
     <Card style={styles.card}>
         <CommentIcon style={styles.icon} />
-        <CardTitle title={<Link to={`/reviews?filter=${query}`} style={styles.titleLink}>{nb}</Link>} subtitle={translate('pos.dashboard.pending_reviews')} />
+        <CardTitle title={<Link to={location} style={styles.titleLink}>{nb}</Link>} subtitle={translate('pos.dashboard.pending_reviews')} />
         <List>
             {reviews.map(record =>
                 <ListItem
