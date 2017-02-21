@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Create,
     Datagrid,
     DateField,
     Edit,
@@ -47,6 +48,30 @@ export const ProductList = props => (
     <List {...props} filters={<ProductFilter />} perPage={20}>
         <GridList />
     </List>
+);
+
+export const ProductCreate = (props) => (
+    <Create {...props}>
+        <TabbedForm>
+            <FormTab label="resources.products.tabs.image">
+                <TextInput source="image" options={{ fullWidth: true }} validation={{ required: true }} />
+                <TextInput source="thumbnail" options={{ fullWidth: true }} validation={{ required: true }} />
+            </FormTab>
+            <FormTab label="resources.products.tabs.details">
+                <TextInput source="reference" validation={{ required: true }} />
+                <NumberInput source="price" validation={{ required: true }} elStyle={{ width: '5em' }} />
+                <NumberInput source="width" validation={{ required: true }} style={{ display: 'inline-block' }} elStyle={{ width: '5em' }} />
+                <NumberInput source="height" validation={{ required: true }} style={{ display: 'inline-block', marginLeft: 32 }} elStyle={{ width: '5em' }} />
+                <ReferenceInput source="category_id" reference="categories" allowEmpty>
+                    <SelectInput source="name" />
+                </ReferenceInput>
+                <NumberInput source="stock" validation={{ required: true }} elStyle={{ width: '5em' }} />
+            </FormTab>
+            <FormTab label="resources.products.tabs.description">
+                <RichTextInput source="description" addLabel={false}/>
+            </FormTab>
+        </TabbedForm>
+    </Create>
 );
 
 const ProductTitle = ({ record }) => <span>Poster #{record.reference}</span>;
