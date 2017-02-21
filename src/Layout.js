@@ -40,12 +40,18 @@ const styles = {
             order: -1,
             transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
             marginLeft: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
         },
         closed: {
             flex: '0 0 16em',
             order: -1,
             transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
             marginLeft: '-16em',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
         },
     },
 };
