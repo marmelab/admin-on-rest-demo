@@ -6,6 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import LabelIcon from 'material-ui/svg-icons/action/label';
 import { translate } from 'admin-on-rest';
+import { DashboardMenuItem } from 'admin-on-rest/lib/mui';
 import { VisitorIcon } from './visitors';
 import { CommandIcon } from './commands';
 import { ProductIcon } from './products';
@@ -32,6 +33,7 @@ const styles = {
 
 const Menu = ({ onMenuTap, translate, logout }) => (
     <div style={styles.main}>
+        <DashboardMenuItem onTouchTap={onMenuTap} />
         {items.map(item => (
             <MenuItem
                 key={item.name}

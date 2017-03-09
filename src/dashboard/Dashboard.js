@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import withWidth from 'material-ui/utils/withWidth';
 import { GET_LIST, GET_MANY } from 'admin-on-rest';
+import { AppBarMobile } from 'admin-on-rest/lib/mui';
 
 import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
@@ -10,7 +12,6 @@ import NewCustomers from './NewCustomers';
 import restClient from '../restClient';
 
 const styles = {
-    main: { margin: '2em' },
     welcome: { marginBottom: '2em' },
     flex: { display: 'flex' },
     leftCol: { flex: 1, marginRight: '1em' },
@@ -107,8 +108,10 @@ class Dashboard extends Component {
             pendingReviewsCustomers,
             revenue,
         } = this.state;
+        const { width } = this.props;
         return (
-            <div style={styles.main}>
+            <div>
+                {width === 1 && <AppBarMobile title="Posters Galore Admin" />}
                 <Welcome style={styles.welcome} />
                 <div style={styles.flex}>
                     <div style={styles.leftCol}>
@@ -132,4 +135,4 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+export default withWidth()(Dashboard);
