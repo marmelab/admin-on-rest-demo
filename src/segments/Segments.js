@@ -1,18 +1,15 @@
 import React from 'react';
-import { Card, CardTitle } from 'material-ui/Card';
+import { Card } from 'material-ui/Card';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import { ViewTitle } from 'admin-on-rest/lib/mui';
 import { translate } from 'admin-on-rest';
 
 import LinkToRelatedCustomers from './LinkToRelatedCustomers';
 import segments from './data';
 
-const styles = {
-    card: { margin: '2em' } ,
-};
-
 export default translate(({ translate }) => (
-    <Card style={styles.card}>
-        <CardTitle title={translate('resources.segments.name')} />
+    <Card>
+        <ViewTitle title={translate('resources.segments.name')} />
         <Table>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>

@@ -10,6 +10,7 @@ import sagas from './sagas';
 import themeReducer from './themeReducer';
 import Login from './Login';
 import Layout from './Layout';
+import Menu from './Menu';
 import { Dashboard } from './dashboard';
 import CustomRoutes from './routes';
 import translations from './i18n';
@@ -44,6 +45,7 @@ class App extends Component {
                 dashboard={Dashboard}
                 loginPage={Login}
                 appLayout={Layout}
+                menu={Menu}
                 messages={translations}
             >
                 <Resource name="customers" list={VisitorList} edit={VisitorEdit} remove={VisitorDelete} icon={VisitorIcon} />
