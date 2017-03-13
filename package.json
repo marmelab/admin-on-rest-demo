@@ -16,10 +16,10 @@
     "fakerest": "^1.2.1",
     "fetch-mock": "^5.5.0",
     "gh-pages": "^0.12.0",
-    "react-scripts": "0.9.0"
+    "react-scripts": "0.9.5"
   },
   "dependencies": {
-    "admin-on-rest": "~0.9.0",
+    "admin-on-rest": "~0.9.1",
     "aor-language-french": "^1.7.0",
     "aor-rich-text-input": "^1.0.0",
     "material-ui": "~0.16.4",
