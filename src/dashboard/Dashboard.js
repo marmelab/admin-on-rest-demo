@@ -58,6 +58,7 @@ class Dashboard extends Component {
             })
             .then(pendingOrders => pendingOrders.map(order => order.customer_id))
             .then(customerIds => restClient(GET_MANY, 'customers', { ids: customerIds }))
+            .then(response => response.data)
             .then(customers => customers.reduce((prev, customer) => {
                 prev[customer.id] = customer; // eslint-disable-line no-param-reassign
                 return prev;
@@ -78,6 +79,7 @@ class Dashboard extends Component {
             })
             .then(reviews => reviews.map(review => review.customer_id))
             .then(customerIds => restClient(GET_MANY, 'customers', { ids: customerIds }))
+            .then(response => response.data)
             .then(customers => customers.reduce((prev, customer) => {
                 prev[customer.id] = customer; // eslint-disable-line no-param-reassign
                 return prev;
