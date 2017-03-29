@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    translate,
     AutocompleteInput,
     BooleanField,
     BooleanInput,
@@ -17,8 +18,7 @@ import {
     SimpleForm,
     TextField,
     TextInput,
-} from 'admin-on-rest/lib/mui';
-import { translate } from 'admin-on-rest';
+} from 'admin-on-rest';
 import Icon from 'material-ui/svg-icons/editor/attach-money';
 
 import Basket from './Basket';

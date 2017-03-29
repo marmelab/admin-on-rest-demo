@@ -1,5 +1,5 @@
 import React from 'react';
-import { FunctionField } from 'admin-on-rest/lib/mui'
+import { FunctionField } from 'admin-on-rest';
 
 const render = record => record.basket.length;
 

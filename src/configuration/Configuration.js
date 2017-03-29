@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import { translate, changeLocale as changeLocaleAction } from 'admin-on-rest';
-import { ViewTitle } from 'admin-on-rest/lib/mui';
+import { translate, changeLocale as changeLocaleAction, ViewTitle } from 'admin-on-rest';
+
 import { changeTheme as changeThemeAction } from './actions';
 
 const styles = {

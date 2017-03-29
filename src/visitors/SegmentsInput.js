@@ -1,6 +1,6 @@
 import React from 'react';
-import { translate } from 'admin-on-rest';
-import { SelectInput } from 'admin-on-rest/lib/mui';
+import { translate, SelectInput } from 'admin-on-rest';
+
 import segments from '../segments/data';
 
 const SegmentsInput = ({ translate, ...rest }) => (

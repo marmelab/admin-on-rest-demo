@@ -15,7 +15,7 @@ import {
     SimpleForm,
     TextField,
     TextInput,
-} from 'admin-on-rest/lib/mui';
+} from 'admin-on-rest';
 import Icon from 'material-ui/svg-icons/communication/comment';
 
 import ProductReferenceField from '../products/ProductReferenceField';

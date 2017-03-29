@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import compose from 'recompose/compose';
 import MenuItem from 'material-ui/MenuItem';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import LabelIcon from 'material-ui/svg-icons/action/label';
-import { translate } from 'admin-on-rest';
-import { DashboardMenuItem } from 'admin-on-rest/lib/mui';
+import { translate, DashboardMenuItem } from 'admin-on-rest';
+
 import { VisitorIcon } from './visitors';
 import { CommandIcon } from './commands';
 import { ProductIcon } from './products';

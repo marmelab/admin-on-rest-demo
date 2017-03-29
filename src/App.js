@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
-import { Admin, Resource } from 'admin-on-rest';
-import { Delete } from 'admin-on-rest/lib/mui';
+import { Admin, Delete, Resource } from 'admin-on-rest';
 
 import './App.css';
 
@@ -12,7 +11,7 @@ import Login from './Login';
 import Layout from './Layout';
 import Menu from './Menu';
 import { Dashboard } from './dashboard';
-import CustomRoutes from './routes';
+import customRoutes from './routes';
 import translations from './i18n';
 
 import { VisitorList, VisitorEdit, VisitorDelete, VisitorIcon } from './visitors';
@@ -40,7 +39,7 @@ class App extends Component {
                 restClient={restClient}
                 customReducers={{ theme: themeReducer }}
                 customSagas={sagas}
-                customRoutes={CustomRoutes}
+                customRoutes={customRoutes}
                 authClient={authClient}
                 dashboard={Dashboard}
                 loginPage={Login}

@@ -3,8 +3,8 @@ import { Card, CardTitle } from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import CommentIcon from 'material-ui/svg-icons/communication/comment';
 import Avatar from 'material-ui/Avatar';
+import { Link } from 'react-router-dom';
 import { translate } from 'admin-on-rest';
-import { Link } from 'react-router';
 
 import StarRatingField from '../reviews/StarRatingField';
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import withWidth from 'material-ui/utils/withWidth';
-import { GET_LIST, GET_MANY } from 'admin-on-rest';
-import { AppBarMobile } from 'admin-on-rest/lib/mui';
+import { AppBarMobile, GET_LIST, GET_MANY } from 'admin-on-rest';
 
 import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReferenceField, TextField } from 'admin-on-rest/lib/mui';
+import { ReferenceField, TextField } from 'admin-on-rest';
 
 const ProductReferenceField = (props) => (
     <ReferenceField label="Product" source="product_id" reference="products" {...props}>

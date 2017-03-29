@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    translate,
     BooleanField,
     Datagrid,
     DateField,
@@ -16,9 +17,7 @@ import {
     TabbedForm,
     TextField,
     TextInput,
-} from 'admin-on-rest/lib/mui';
-import { translate } from 'admin-on-rest';
-
+} from 'admin-on-rest';
 import Icon from 'material-ui/svg-icons/social/person';
 
 import EditButton from '../buttons/EditButton';

@@ -1,5 +1,6 @@
 import React from 'react';
-import { ReferenceField } from 'admin-on-rest/lib/mui';
+import { ReferenceField } from 'admin-on-rest';
+
 import FullNameField from './FullNameField';
 
 const CustomerReferenceField = (props) => (
