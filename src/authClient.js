@@ -1,4 +1,4 @@
-import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_CHECK } from 'admin-on-rest';
+import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_CHECK, AUTH_ERROR } from 'admin-on-rest';
 
 export default (type, params) => {
     if (type === AUTH_LOGIN) {
@@ -9,6 +9,9 @@ export default (type, params) => {
     }
     if (type === AUTH_LOGOUT) {
         localStorage.removeItem('username');
+        return Promise.resolve();
+    }
+    if (type === AUTH_ERROR) {
         return Promise.resolve();
     }
     if (type === AUTH_CHECK) {

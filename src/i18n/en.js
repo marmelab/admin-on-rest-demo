@@ -58,6 +58,7 @@ export default {
                     total: 'Total',
                     unit_price: 'Unit Price',
                 },
+                customer_id: 'Customer',
                 date_gte: 'Passed Since',
                 date_lte: 'Passed Before',
                 total_gte: 'Min amount',
