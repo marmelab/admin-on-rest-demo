@@ -5,7 +5,7 @@
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "babel-polyfill": "^6.16.0",
-    "eslint": "^3.10.2",
+    "eslint": "3.16.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-config-airbnb-base": "^10.0.1",
     "eslint-import-resolver-node": "^0.2.3",
@@ -13,6 +13,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.7.1",
+    "eslint-plugin-flowtype": "latest",
     "fakerest": "^1.2.1",
     "fetch-mock": "^5.5.0",
     "gh-pages": "^0.12.0",
@@ -25,9 +26,13 @@
     "material-ui": "~0.16.4",
     "react": "~15.4.0",
     "react-dom": "~15.4.0",
-    "react-redux": "^5.0.1",
+    "react-redux": "4.4.5",
     "react-tap-event-plugin": "~2.0.0",
-    "redux-saga": "~0.14.2"
+    "redux-saga": "~0.14.2",
+	"react-router": "2.8.1",
+	"react-router-redux": "4.0.6",
+	"redux-form": "~6.2.0",
+	"recompose": "0.21.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -115,7 +115,7 @@ export const VisitorEdit = (props) => (
 
 const VisitorDeleteTitle = translate(({ record, translate }) => <span>
     {translate('resources.customers.page.delete')}&nbsp;
-    {record && <img src={`${record.avatar}?size=25x25`} width="25" role="presentation" />}
+    {record && <img src={`${record.avatar}?size=25x25`} width="25"  alt="" />}
     {record && `${record.first_name} ${record.last_name}`}
 </span>);
 

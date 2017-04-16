@@ -23,7 +23,7 @@ const GridList = ({ ids, isLoading, data, currentSort, basePath, rowStyle }) => 
                     actionIcon={<EditButton basePath={basePath} record={data[id]} label="" />}
                     titleBackground="linear-gradient(to top, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.4) 70%,rgba(0,0,0,0) 100%)"
                 >
-                    <img src={data[id].thumbnail} role="presentation" />
+                    <img src={data[id].thumbnail}  alt="" />
                 </GridTile>
             ))}
         </MuiGridList>
