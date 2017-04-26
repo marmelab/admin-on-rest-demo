@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    translate,
     Create,
     Datagrid,
     DateField,
@@ -15,8 +16,7 @@ import {
     TabbedForm,
     TextField,
     TextInput,
-} from 'admin-on-rest/lib/mui';
-import { translate } from 'admin-on-rest';
+} from 'admin-on-rest';
 import Icon from 'material-ui/svg-icons/image/collections';
 import Chip from 'material-ui/Chip';
 import RichTextInput from 'aor-rich-text-input';
