@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { propTypes, reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import { push as pushAction } from 'react-router-redux';
 import compose from 'recompose/compose';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -10,12 +9,11 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { Card, CardActions } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
-import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
 import LockIcon from 'material-ui/svg-icons/action/lock-outline';
 import { cyan500, pinkA200 } from 'material-ui/styles/colors';
 
-import { AUTH_LOGIN, translate } from 'admin-on-rest';
+import { Notification, translate, userLogin as userLoginAction } from 'admin-on-rest';
 
 const styles = {
     main: {
@@ -66,22 +64,14 @@ const renderInput = ({ meta: { touched, error } = {}, input: { ...inputProps }, 
     />;
 
 class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { signInError: false };
-    }
 
     login = ({ username, password }) => {
-        const { authClient, push, location } = this.props;
-        if (!authClient) return;
-        authClient(AUTH_LOGIN, { username, password })
-            .then(() => push(location.state ? location.state.nextPathname : '/'))
-            .catch(e => this.setState({ signInError: e }));
+        const { userLogin, location } = this.props;
+        userLogin({ username, password }, location.state ? location.state.nextPathname : '/');
     }
 
     render() {
         const { handleSubmit, submitting, theme, translate } = this.props;
-        const { signInError } = this.state;
         const muiTheme = getMuiTheme(theme);
         const { primary1Color, accent1Color } = getColorsFromTheme(muiTheme);
         return (
@@ -91,8 +81,6 @@ class Login extends Component {
                         <div style={styles.avatar}>
                             <Avatar backgroundColor={accent1Color} icon={<LockIcon />} size={60} />
                         </div>
-                        {signInError && <Snackbar open autoHideDuration={4000} message={signInError.message || signInError || translate('aor.auth.sign_in_error')} />}
-
                         <form onSubmit={handleSubmit(this.login)}>
                             <div style={styles.form}>
                                 <p style={styles.hint}>Hint: demo / demo</p>
@@ -117,6 +105,7 @@ class Login extends Component {
                             </CardActions>
                         </form>
                     </Card>
+                    <Notification />
                 </div>
             </MuiThemeProvider>
         );
@@ -147,7 +136,7 @@ const enhance = compose(
             return errors;
         },
     }),
-    connect(null, { push: pushAction }),
+    connect(null, { userLogin: userLoginAction }),
 );
 
 export default enhance(Login);
