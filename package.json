@@ -22,7 +22,7 @@
     "admin-on-rest": "~1.0.0",
     "aor-language-french": "^1.8.0",
     "aor-rich-text-input": "^1.0.0",
-    "material-ui": "~0.16.4",
+    "material-ui": "~0.17.4",
     "prop-types": "~15.5.7",
     "react": "~15.5.4",
     "react-dom": "~15.5.4",
