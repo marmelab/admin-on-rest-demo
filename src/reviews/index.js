@@ -53,7 +53,7 @@ export const ReviewList = (props) => (
             <CustomerReferenceField />
             <ProductReferenceField />
             <StarRatingField />
-            <TextField source="comment" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
+            <TextField source="comment" style={{ maxWidth: '18em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
             <TextField source="status" />
             <ApproveButton style={{ padding: 0 }} />
             <EditButton style={{ padding: 0 }} />
