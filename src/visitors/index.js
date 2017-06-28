@@ -27,6 +27,7 @@ import StarRatingField from '../reviews/StarRatingField';
 import FullNameField from './FullNameField';
 import SegmentsField from './SegmentsField';
 import SegmentInput from './SegmentInput';
+import SegmentsInput from './SegmentsInput';
 
 export const VisitorIcon = Icon;
 
@@ -102,7 +103,7 @@ export const VisitorEdit = (props) => (
                 </ReferenceManyField>
             </FormTab>
             <FormTab label="resources.customers.tabs.stats">
-                <SegmentsField />
+                <SegmentsInput />
                 <NullableBooleanInput source="has_newsletter" />
                 <DateField source="first_seen" style={{ width: 128, display: 'inline-block' }} />
                 <DateField source="latest_purchase" style={{ width: 128, display: 'inline-block' }} />
