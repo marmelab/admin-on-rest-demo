@@ -26,7 +26,7 @@ import ProductReferenceField from '../products/ProductReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
 import FullNameField from './FullNameField';
 import SegmentsField from './SegmentsField';
-import SegmentsInput from './SegmentsInput';
+import SegmentInput from './SegmentInput';
 
 export const VisitorIcon = Icon;
 
@@ -36,7 +36,7 @@ const VisitorFilter = (props) => (
         <DateInput source="last_seen_gte" />
         <NullableBooleanInput source="has_ordered" />
         <NullableBooleanInput source="has_newsletter" defaultValue={true} />
-        <SegmentsInput />
+        <SegmentInput />
     </Filter>
 );
 
