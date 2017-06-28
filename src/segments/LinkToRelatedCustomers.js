@@ -13,7 +13,7 @@ const LinkToRelatedCustomers = ({ segment, translate }) => (
         icon={<VisitorIcon />}
         containerElement={<Link to={{
             pathname: "/customers",
-            search: stringify({ filter: JSON.stringify({ groups: segment }) }),
+            search: stringify({ page: 1, perPage: 25, filter: JSON.stringify({ groups: segment }) }),
         }} />}
     />
 );
