@@ -19,7 +19,7 @@
     "react-scripts": "1.0.5"
   },
   "dependencies": {
-    "admin-on-rest": "~1.1.0",
+    "admin-on-rest": "~1.2.0",
     "aor-language-french": "^1.8.0",
     "aor-rich-text-input": "^1.0.0",
     "material-ui": "~0.17.4",
