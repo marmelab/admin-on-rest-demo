@@ -21,7 +21,7 @@ export const CategoryIcon = Icon;
 
 export const CategoryList = (props) => (
     <List {...props} sort={{ field: 'name', order: 'ASC' }}>
-        <Datagrid >
+        <Datagrid headerOptions={{ adjustForCheckbox: true, displaySelectAll: true }} bodyOptions={{ displayRowCheckbox: true }} rowOptions={{ selectable: true }} options={{ multiSelectable: true }}>
             <TextField source="name" style={{ padding: '0 12px 0 25px' }} />
             <LinkToRelatedProducts />
             <EditButton />
