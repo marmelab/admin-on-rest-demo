@@ -1,11 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import MenuItem from 'material-ui/MenuItem';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import LabelIcon from 'material-ui/svg-icons/action/label';
-import { translate, DashboardMenuItem } from 'admin-on-rest';
+import { translate, DashboardMenuItem, MenuItemLink } from 'admin-on-rest';
 
 import { VisitorIcon } from './visitors';
 import { CommandIcon } from './commands';
@@ -33,21 +31,21 @@ const styles = {
 
 const Menu = ({ onMenuTap, translate, logout }) => (
     <div style={styles.main}>
-        <DashboardMenuItem onTouchTap={onMenuTap} />
+        <DashboardMenuItem onClick={onMenuTap} />
         {items.map(item => (
-            <MenuItem
+            <MenuItemLink
                 key={item.name}
-                containerElement={<Link to={`/${item.name}`} />}
+                to={`/${item.name}`}
                 primaryText={translate(`resources.${item.name}.name`, { smart_count: 2 })}
                 leftIcon={item.icon}
-                onTouchTap={onMenuTap}
+                onClick={onMenuTap}
             />
         ))}
-        <MenuItem
-            containerElement={<Link to="/configuration" />}
+        <MenuItemLink
+            to="/configuration"
             primaryText={translate('pos.configuration')}
             leftIcon={<SettingsIcon />}
-            onTouchTap={onMenuTap}
+            onClick={onMenuTap}
         />
         {logout}
     </div>
