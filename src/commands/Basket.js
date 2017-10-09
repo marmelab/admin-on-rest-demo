@@ -99,7 +99,7 @@ const mapStateToProps = (state, props) => {
     const productIds = basket.map(item => item.product_id);
     return {
         products: productIds
-            .map(productId => state.admin.products.data[productId])
+            .map(productId => state.admin.resources.products.data[productId])
             .filter(r => typeof r !== 'undefined')
             .reduce((prev, next) => {
                 prev[next.id] = next;
