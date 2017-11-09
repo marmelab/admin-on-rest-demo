@@ -1,5 +1,5 @@
 import React from 'react';
-import { translate, SelectInput } from 'admin-on-rest';
+import { translate, SelectInput } from 'react-admin';
 
 import segments from '../segments/data';
 

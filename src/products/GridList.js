@@ -1,6 +1,6 @@
 import React from 'react';
 import { GridList as MuiGridList, GridTile } from 'material-ui/GridList';
-import { NumberField, EditButton } from 'admin-on-rest';
+import { NumberField, EditButton } from 'react-admin';
 
 const styles = {
     root: {

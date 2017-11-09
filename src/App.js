@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
-import { Admin, Delete, Resource } from 'admin-on-rest';
+import { Admin, Delete, Resource } from 'react-admin';
 
 import './App.css';
 
@@ -20,7 +20,7 @@ import { ProductList, ProductCreate, ProductEdit, ProductIcon } from './products
 import { CategoryList, CategoryEdit, CategoryIcon } from './categories';
 import { ReviewList, ReviewEdit, ReviewIcon } from './reviews';
 
-import restClient from './restClient';
+import dataProvider from './dataProvider';
 import fakeRestServer from './restServer';
 
 class App extends Component {
@@ -36,7 +36,7 @@ class App extends Component {
         return (
             <Admin
                 title="Posters Galore Admin"
-                restClient={restClient}
+                dataProvider={dataProvider}
                 customReducers={{ theme: themeReducer }}
                 customSagas={sagas}
                 customRoutes={customRoutes}

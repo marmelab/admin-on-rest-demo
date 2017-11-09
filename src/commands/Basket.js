@@ -9,7 +9,7 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
-import { translate, crudGetMany as crudGetManyAction } from 'admin-on-rest';
+import { translate, crudGetMany as crudGetManyAction } from 'react-admin';
 import compose from 'recompose/compose';
 
 class Basket extends Component {

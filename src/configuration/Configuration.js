@@ -1,8 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import { translate, changeLocale as changeLocaleAction, ViewTitle } from 'admin-on-rest';
+import Button from 'material-ui/Button';
+import {
+    translate,
+    changeLocale as changeLocaleAction,
+    ViewTitle,
+} from 'react-admin';
 
 import { changeTheme as changeThemeAction } from './actions';
 
@@ -11,18 +15,52 @@ const styles = {
     button: { margin: '1em' },
 };
 
-const Configuration = ({ theme, locale, changeTheme, changeLocale, translate }) => (
+const Configuration = ({
+    theme,
+    locale,
+    changeTheme,
+    changeLocale,
+    translate,
+}) => (
     <Card>
         <ViewTitle title={translate('pos.configuration')} />
         <CardText>
             <div style={styles.label}>{translate('pos.theme.name')}</div>
-            <RaisedButton style={styles.button} label={translate('pos.theme.light')} primary onClick={() => changeTheme('light')} />
-            <RaisedButton style={styles.button} label={translate('pos.theme.dark')} secondary onClick={() => changeTheme('dark')} />
+            <Button
+                raised
+                style={styles.button}
+                primary
+                onClick={() => changeTheme('light')}
+            >
+                {translate('pos.theme.light')}
+            </Button>
+            <Button
+                raised
+                style={styles.button}
+                secondary
+                onClick={() => changeTheme('dark')}
+            >
+                {translate('pos.theme.dark')}
+            </Button>
         </CardText>
         <CardText>
             <div style={styles.label}>{translate('pos.language')}</div>
-            <RaisedButton style={styles.button} label="en" primary={locale === 'en'} onClick={() => changeLocale('en')} />
-            <RaisedButton style={styles.button} label="fr" primary={locale === 'fr'} onClick={() => changeLocale('fr')} />
+            <Button
+                raised
+                style={styles.button}
+                primary={locale === 'en'}
+                onClick={() => changeLocale('en')}
+            >
+                en
+            </Button>
+            <Button
+                raised
+                style={styles.button}
+                primary={locale === 'fr'}
+                onClick={() => changeLocale('fr')}
+            >
+                fr
+            </Button>
         </CardText>
     </Card>
 );

@@ -1,7 +1,15 @@
 import { connect } from 'react-redux';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import { Layout, defaultTheme } from 'admin-on-rest';
+import { Layout } from 'react-admin';
 
-export default connect(state => ({
-    theme: state.theme === 'dark' ? darkBaseTheme : defaultTheme,
-}))(Layout);
+// FIXME LAyout doesn't use the theme anymore...
+// const darkTheme = {
+//     palette: {
+//         type: 'dark', // Switching the dark mode on is a single property value change.
+//     },
+// };
+
+// export default connect(state => ({
+//     theme: state.theme === 'dark' ? darkTheme : {},
+// }))(Layout);
+
+export default Layout;

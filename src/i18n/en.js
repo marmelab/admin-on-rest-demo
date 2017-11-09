@@ -15,12 +15,14 @@ export default {
             new_customers: 'New Customers',
             pending_orders: 'Pending Orders',
             order: {
-                items: 'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
+                items:
+                    'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
             },
             welcome: {
-                title: 'Welcome to admin-on-rest demo',
-                subtitle: 'This is the admin of an imaginary poster shop. Fell free to explore and modify the data - it\'s local to your computer, and will reset each time you reload.',
-                aor_button: 'Admin-on-rest website',
+                title: 'Welcome to react-admin demo',
+                subtitle:
+                    "This is the admin of an imaginary poster shop. Fell free to explore and modify the data - it's local to your computer, and will reset each time you reload.",
+                aor_button: 'react-admin site',
                 demo_button: 'Source for this demo',
             },
         },
@@ -44,7 +46,6 @@ export default {
             page: {
                 delete: 'Delete Customer',
             },
-
         },
         commands: {
             name: 'Order |||| Orders',
@@ -93,7 +94,6 @@ export default {
             fields: {
                 products: 'Products',
             },
-
         },
         reviews: {
             name: 'Review |||| Reviews',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardActions } from 'material-ui/Card';
-import { ListButton, DeleteButton, RefreshButton } from 'admin-on-rest';
+import { ListButton, DeleteButton, RefreshButton } from 'react-admin';
 import AcceptButton from './AcceptButton';
 import RejectButton from './RejectButton';
 

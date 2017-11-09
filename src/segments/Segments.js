@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'material-ui/Card';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import { translate, ViewTitle } from 'admin-on-rest';
+import { translate, ViewTitle } from 'react-admin';
 
 import LinkToRelatedCustomers from './LinkToRelatedCustomers';
 import segments from './data';

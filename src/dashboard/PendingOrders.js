@@ -1,16 +1,16 @@
 import React from 'react';
-import { Card, CardTitle } from 'material-ui/Card';
-import { List, ListItem } from 'material-ui/List';
+import Card, { CardHeader } from 'material-ui/Card';
+import List, { ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
-import { translate } from 'admin-on-rest';
+import { translate } from 'react-admin';
 
 const style = { flex: 1 };
 
 export default translate(({ orders = [], customers = {}, translate }) => (
     <Card style={style}>
-        <CardTitle title={translate('pos.dashboard.pending_orders')} />
+        <CardHeader title={translate('pos.dashboard.pending_orders')} />
         <List>
-            {orders.map(record =>
+            {orders.map(record => (
                 <ListItem
                     key={record.id}
                     href={`#/commands/${record.id}`}
@@ -20,14 +20,28 @@ export default translate(({ orders = [], customers = {}, translate }) => (
                             {translate('pos.dashboard.order.items', {
                                 smart_count: record.basket.length,
                                 nb_items: record.basket.length,
-                                customer_name: customers[record.customer_id] ? `${customers[record.customer_id].first_name} ${customers[record.customer_id].last_name}` : ''
+                                customer_name: customers[record.customer_id]
+                                    ? `${customers[record.customer_id]
+                                          .first_name} ${customers[
+                                          record.customer_id
+                                      ].last_name}`
+                                    : '',
                             })}
                         </p>
                     }
                     rightAvatar={<strong>{record.total}$</strong>}
-                    leftAvatar={customers[record.customer_id] ? <Avatar src={`${customers[record.customer_id].avatar}?size=32x32`} /> : <Avatar />}
+                    leftAvatar={
+                        customers[record.customer_id] ? (
+                            <Avatar
+                                src={`${customers[record.customer_id]
+                                    .avatar}?size=32x32`}
+                            />
+                        ) : (
+                            <Avatar />
+                        )
+                    }
                 />
-            )}
+            ))}
         </List>
     </Card>
 ));
