@@ -58,7 +58,7 @@ const enhance = compose(
         theme: state.theme,
         locale: state.locale,
     })),
-    translate,
+    translate
 );
 
 export default enhance(Menu);

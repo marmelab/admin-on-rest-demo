@@ -60,7 +60,7 @@ export const VisitorList = props => (
         sort={{ field: 'last_seen', order: 'DESC' }}
         perPage={25}
     >
-        <Datagrid bodyOptions={{ stripedRows: true, showRowHover: true }}>
+        <Datagrid>
             <FullNameField />
             <DateField source="last_seen" type="date" />
             <NumberField

@@ -1,6 +1,11 @@
 import React from 'react';
-import { Card } from 'material-ui/Card';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import Card from 'material-ui/Card';
+import Table, {
+    TableBody,
+    TableHead,
+    TableRow,
+    TableCell,
+} from 'material-ui/Table';
 import { translate, ViewTitle } from 'react-admin';
 
 import LinkToRelatedCustomers from './LinkToRelatedCustomers';
@@ -10,19 +15,21 @@ export default translate(({ translate }) => (
     <Card>
         <ViewTitle title={translate('resources.segments.name')} />
         <Table>
-            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+            <TableHead>
                 <TableRow>
-                    <TableHeaderColumn>{translate('resources.segments.fields.name')}</TableHeaderColumn>
-                    <TableHeaderColumn />
+                    <TableCell>
+                        {translate('resources.segments.fields.name')}
+                    </TableCell>
+                    <TableCell />
                 </TableRow>
-            </TableHeader>
-            <TableBody displayRowCheckbox={false}>
+            </TableHead>
+            <TableBody>
                 {segments.map(segment => (
                     <TableRow key={segment.id}>
-                        <TableRowColumn>{translate(segment.name)}</TableRowColumn>
-                        <TableRowColumn>
+                        <TableCell>{translate(segment.name)}</TableCell>
+                        <TableCell>
                             <LinkToRelatedCustomers segment={segment.id} />
-                        </TableRowColumn>
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>

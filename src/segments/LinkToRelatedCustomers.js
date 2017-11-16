@@ -1,30 +1,39 @@
 import React from 'react';
+import compose from 'recompose/compose';
 import Button from 'material-ui/Button';
-import { Link } from 'react-router-dom';
+import { withStyles } from 'material-ui/styles';
+import { Link } from 'react-admin';
 import { translate } from 'react-admin';
 import { stringify } from 'query-string';
 
 import { VisitorIcon } from '../visitors';
 
-const LinkToRelatedCustomers = ({ segment, translate }) => (
-    <Button
-        color="primary"
-        containerElement={
-            <Link
-                to={{
-                    pathname: '/customers',
-                    search: stringify({
-                        page: 1,
-                        perPage: 25,
-                        filter: JSON.stringify({ groups: segment }),
-                    }),
-                }}
-            />
-        }
-    >
-        <VisitorIcon />
-        {translate('resources.segments.fields.customers')}
+const styles = {
+    icon: { paddingRight: '0.5em' },
+    link: {
+        display: 'inline-flex',
+        alignItems: 'center',
+    },
+};
+
+const LinkToRelatedCustomers = ({ classes, segment, translate }) => (
+    <Button color="primary">
+        <Link
+            to={{
+                pathname: '/customers',
+                search: stringify({
+                    page: 1,
+                    perPage: 25,
+                    filter: JSON.stringify({ groups: segment }),
+                }),
+            }}
+            className={classes.link}
+        >
+            <VisitorIcon className={classes.icon} />
+            {translate('resources.segments.fields.customers')}
+        </Link>
     </Button>
 );
 
-export default translate(LinkToRelatedCustomers);
+const enhance = compose(withStyles(styles), translate);
+export default enhance(LinkToRelatedCustomers);
