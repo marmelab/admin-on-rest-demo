@@ -4,7 +4,13 @@ import { translate, SelectArrayInput } from 'react-admin';
 import segments from '../segments/data';
 
 const SegmentsInput = ({ translate, ...rest }) => (
-    <SelectArrayInput {...rest} choices={segments.map(segment => ({ id: segment.id, name: translate(segment.name) }))} />
+    <SelectArrayInput
+        {...rest}
+        choices={segments.map(segment => ({
+            id: segment.id,
+            name: translate(segment.name),
+        }))}
+    />
 );
 
 const TranslatedSegmentsInput = translate(SegmentsInput);

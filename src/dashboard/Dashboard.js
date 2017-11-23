@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ViewTitle, GET_LIST, GET_MANY } from 'react-admin';
+import { GET_LIST, GET_MANY } from 'react-admin';
 
 import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
@@ -42,8 +42,8 @@ class Dashboard extends Component {
                             }
                             return stats;
                         },
-                        { revenue: 0, nbNewOrders: 0, pendingOrders: [] },
-                    ),
+                        { revenue: 0, nbNewOrders: 0, pendingOrders: [] }
+                    )
             )
             .then(({ revenue, nbNewOrders, pendingOrders }) => {
                 this.setState({
@@ -59,20 +59,20 @@ class Dashboard extends Component {
                 return pendingOrders;
             })
             .then(pendingOrders =>
-                pendingOrders.map(order => order.customer_id),
+                pendingOrders.map(order => order.customer_id)
             )
             .then(customerIds =>
-                dataProvider(GET_MANY, 'customers', { ids: customerIds }),
+                dataProvider(GET_MANY, 'customers', { ids: customerIds })
             )
             .then(response => response.data)
             .then(customers =>
                 customers.reduce((prev, customer) => {
                     prev[customer.id] = customer; // eslint-disable-line no-param-reassign
                     return prev;
-                }, {}),
+                }, {})
             )
             .then(customers =>
-                this.setState({ pendingOrdersCustomers: customers }),
+                this.setState({ pendingOrdersCustomers: customers })
             );
 
         dataProvider(GET_LIST, 'reviews', {
@@ -81,28 +81,28 @@ class Dashboard extends Component {
             pagination: { page: 1, perPage: 100 },
         })
             .then(response => response.data)
-            .then((reviews) => {
+            .then(reviews => {
                 const nbPendingReviews = reviews.reduce(nb => ++nb, 0);
                 const pendingReviews = reviews.slice(
                     0,
-                    Math.min(10, reviews.length),
+                    Math.min(10, reviews.length)
                 );
                 this.setState({ pendingReviews, nbPendingReviews });
                 return pendingReviews;
             })
             .then(reviews => reviews.map(review => review.customer_id))
             .then(customerIds =>
-                dataProvider(GET_MANY, 'customers', { ids: customerIds }),
+                dataProvider(GET_MANY, 'customers', { ids: customerIds })
             )
             .then(response => response.data)
             .then(customers =>
                 customers.reduce((prev, customer) => {
                     prev[customer.id] = customer; // eslint-disable-line no-param-reassign
                     return prev;
-                }, {}),
+                }, {})
             )
             .then(customers =>
-                this.setState({ pendingReviewsCustomers: customers }),
+                this.setState({ pendingReviewsCustomers: customers })
             );
 
         dataProvider(GET_LIST, 'customers', {
@@ -111,7 +111,7 @@ class Dashboard extends Component {
             pagination: { page: 1, perPage: 100 },
         })
             .then(response => response.data)
-            .then((newCustomers) => {
+            .then(newCustomers => {
                 this.setState({ newCustomers });
                 this.setState({
                     nbNewCustomers: newCustomers.reduce(nb => ++nb, 0),
@@ -133,7 +133,6 @@ class Dashboard extends Component {
         } = this.state;
         return (
             <div>
-                <ViewTitle title="Posters Galore Admin" />
                 <Welcome style={styles.welcome} />
                 <div style={styles.flex}>
                     <div style={styles.leftCol}>

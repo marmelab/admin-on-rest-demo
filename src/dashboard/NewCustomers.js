@@ -1,24 +1,33 @@
 import React from 'react';
+import compose from 'recompose/compose';
 import Card, { CardHeader } from 'material-ui/Card';
-import List, { ListItem } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import CustomerIcon from 'material-ui-icons/PersonAdd';
+import { withStyles } from 'material-ui/styles';
+import { Link } from 'react-router-dom';
 import { translate } from 'react-admin';
 
-const styles = {
+const styles = theme => ({
     card: { borderLeft: 'solid 4px #4caf50', flex: 1, marginLeft: '1em' },
     icon: {
         float: 'right',
         width: 64,
         height: 64,
-        padding: 16,
+        padding: '16px 16px 0 16px',
         color: '#4caf50',
     },
-};
+    avatar: {
+        background: theme.palette.background.contentFrame,
+    },
+    listItemText: {
+        paddingRight: 0,
+    },
+});
 
-export default translate(({ visitors = [], nb, translate }) => (
-    <Card style={styles.card}>
-        <CustomerIcon style={styles.icon} />
+const NewCustomers = ({ visitors = [], nb, translate, classes }) => (
+    <Card className={classes.card}>
+        <CustomerIcon className={classes.icon} />
         <CardHeader
             title={nb}
             subheader={translate('pos.dashboard.new_customers')}
@@ -26,13 +35,25 @@ export default translate(({ visitors = [], nb, translate }) => (
         <List>
             {visitors.map(record => (
                 <ListItem
-                    href={`#/customers/${record.id}`}
+                    button
+                    to={`/customers/${record.id}`}
+                    component={Link}
                     key={record.id}
-                    leftAvatar={<Avatar src={`${record.avatar}?size=32x32`} />}
                 >
-                    {record.first_name} {record.last_name}
+                    <Avatar
+                        src={`${record.avatar}?size=32x32`}
+                        className={classes.avatar}
+                    />
+                    <ListItemText
+                        primary={`${record.first_name} ${record.last_name}`}
+                        className={classes.listItemText}
+                    />
                 </ListItem>
             ))}
         </List>
     </Card>
-));
+);
+
+const enhance = compose(withStyles(styles), translate);
+
+export default enhance(NewCustomers);

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-    Table,
+import Table, {
     TableBody,
-    TableHeader,
-    TableHeaderColumn,
+    TableHead,
+    TableCell,
     TableRow,
-    TableRowColumn,
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import { translate, crudGetMany as crudGetManyAction } from 'react-admin';
@@ -24,68 +22,130 @@ class Basket extends Component {
         const { record, products, translate } = this.props;
         const { basket } = record;
         return (
-            <Paper style={{ width: '42em', float: 'right' }} zDepth={2}>
-                <Table selectable={false}>
-                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+            <Paper style={{ width: '42em', float: 'right', zIndex: 2 }}>
+                <Table>
+                    <TableHead>
                         <TableRow>
-                            <TableHeaderColumn>
-                                {translate('resources.commands.fields.basket.reference')}
-                            </TableHeaderColumn>
-                            <TableHeaderColumn style={{ textAlign: 'right' }}>
-                                {translate('resources.commands.fields.basket.unit_price')}
-                            </TableHeaderColumn>
-                            <TableHeaderColumn style={{ textAlign: 'right' }}>
-                                {translate('resources.commands.fields.basket.quantity')}
-                            </TableHeaderColumn>
-                            <TableHeaderColumn style={{ textAlign: 'right' }}>
-                                {translate('resources.commands.fields.basket.total')}
-                            </TableHeaderColumn>
+                            <TableCell>
+                                {translate(
+                                    'resources.commands.fields.basket.reference'
+                                )}
+                            </TableCell>
+                            <TableCell style={{ textAlign: 'right' }}>
+                                {translate(
+                                    'resources.commands.fields.basket.unit_price'
+                                )}
+                            </TableCell>
+                            <TableCell style={{ textAlign: 'right' }}>
+                                {translate(
+                                    'resources.commands.fields.basket.quantity'
+                                )}
+                            </TableCell>
+                            <TableCell style={{ textAlign: 'right' }}>
+                                {translate(
+                                    'resources.commands.fields.basket.total'
+                                )}
+                            </TableCell>
                         </TableRow>
-                    </TableHeader>
-                    <TableBody displayRowCheckbox={false}>
-                        {basket.map(item => products[item.product_id] && (
-                            <TableRow key={item.product_id}>
-                                <TableRowColumn>
-                                    {products[item.product_id].reference}
-                                </TableRowColumn>
-                                <TableRowColumn style={{ textAlign: 'right' }}>
-                                    {products[item.product_id].price.toLocaleString(undefined, { style: 'currency', currency: 'USD' })}
-                                </TableRowColumn>
-                                <TableRowColumn style={{ textAlign: 'right' }}>
-                                    {item.quantity}
-                                </TableRowColumn>
-                                <TableRowColumn style={{ textAlign: 'right' }}>
-                                    {(products[item.product_id].price * item.quantity).toLocaleString(undefined, { style: 'currency', currency: 'USD' })}
-                                </TableRowColumn>
-                            </TableRow>)
+                    </TableHead>
+                    <TableBody>
+                        {basket.map(
+                            item =>
+                                products[item.product_id] && (
+                                    <TableRow key={item.product_id}>
+                                        <TableCell>
+                                            {
+                                                products[item.product_id]
+                                                    .reference
+                                            }
+                                        </TableCell>
+                                        <TableCell
+                                            style={{ textAlign: 'right' }}
+                                        >
+                                            {products[
+                                                item.product_id
+                                            ].price.toLocaleString(undefined, {
+                                                style: 'currency',
+                                                currency: 'USD',
+                                            })}
+                                        </TableCell>
+                                        <TableCell
+                                            style={{ textAlign: 'right' }}
+                                        >
+                                            {item.quantity}
+                                        </TableCell>
+                                        <TableCell
+                                            style={{ textAlign: 'right' }}
+                                        >
+                                            {(products[item.product_id].price *
+                                                item.quantity
+                                            ).toLocaleString(undefined, {
+                                                style: 'currency',
+                                                currency: 'USD',
+                                            })}
+                                        </TableCell>
+                                    </TableRow>
+                                )
                         )}
                         <TableRow>
-                            <TableRowColumn colSpan={2} />
-                            <TableRowColumn>{translate('resources.commands.fields.basket.sum')}</TableRowColumn>
-                            <TableRowColumn style={{ textAlign: 'right' }}>
-                                {record.total_ex_taxes.toLocaleString(undefined, { style: 'currency', currency: 'USD' })}
-                            </TableRowColumn>
+                            <TableCell colSpan={2} />
+                            <TableCell>
+                                {translate(
+                                    'resources.commands.fields.basket.sum'
+                                )}
+                            </TableCell>
+                            <TableCell style={{ textAlign: 'right' }}>
+                                {record.total_ex_taxes.toLocaleString(
+                                    undefined,
+                                    { style: 'currency', currency: 'USD' }
+                                )}
+                            </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn colSpan={2} />
-                            <TableRowColumn>{translate('resources.commands.fields.basket.delivery')}</TableRowColumn>
-                            <TableRowColumn style={{ textAlign: 'right' }}>
-                                {record.delivery_fees.toLocaleString(undefined, { style: 'currency', currency: 'USD' })}
-                            </TableRowColumn>
+                            <TableCell colSpan={2} />
+                            <TableCell>
+                                {translate(
+                                    'resources.commands.fields.basket.delivery'
+                                )}
+                            </TableCell>
+                            <TableCell style={{ textAlign: 'right' }}>
+                                {record.delivery_fees.toLocaleString(
+                                    undefined,
+                                    { style: 'currency', currency: 'USD' }
+                                )}
+                            </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn colSpan={2} />
-                            <TableRowColumn>{translate('resources.commands.fields.basket.tax_rate')}</TableRowColumn>
-                            <TableRowColumn style={{ textAlign: 'right' }}>
-                                {record.tax_rate.toLocaleString(undefined, { style: 'percent' })}
-                            </TableRowColumn>
+                            <TableCell colSpan={2} />
+                            <TableCell>
+                                {translate(
+                                    'resources.commands.fields.basket.tax_rate'
+                                )}
+                            </TableCell>
+                            <TableCell style={{ textAlign: 'right' }}>
+                                {record.tax_rate.toLocaleString(undefined, {
+                                    style: 'percent',
+                                })}
+                            </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn colSpan={2} />
-                            <TableRowColumn style={{ fontWeight: 'bold' }}>{translate('resources.commands.fields.basket.total')}</TableRowColumn>
-                            <TableRowColumn style={{ textAlign: 'right', fontWeight: 'bold' }}>
-                                {record.total.toLocaleString(undefined, { style: 'currency', currency: 'USD' })}
-                            </TableRowColumn>
+                            <TableCell colSpan={2} />
+                            <TableCell style={{ fontWeight: 'bold' }}>
+                                {translate(
+                                    'resources.commands.fields.basket.total'
+                                )}
+                            </TableCell>
+                            <TableCell
+                                style={{
+                                    textAlign: 'right',
+                                    fontWeight: 'bold',
+                                }}
+                            >
+                                {record.total.toLocaleString(undefined, {
+                                    style: 'currency',
+                                    currency: 'USD',
+                                })}
+                            </TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

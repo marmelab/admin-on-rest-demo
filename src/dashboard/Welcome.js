@@ -11,16 +11,20 @@ export default translate(({ style, translate }) => (
     <Card style={style}>
         <CardHeader
             title={translate('pos.dashboard.welcome.title')}
-            subtitle={translate('pos.dashboard.welcome.subtitle')}
-            avatar={<Avatar icon={<LightBulbIcon />} />}
+            subheader={translate('pos.dashboard.welcome.subtitle')}
+            avatar={
+                <Avatar>
+                    <LightBulbIcon />
+                </Avatar>
+            }
         />
         <CardActions style={{ textAlign: 'right' }}>
             <Button href="https://marmelab.com/react-admin">
-                <HomeIcon />
+                <HomeIcon style={{ paddingRight: '0.5em' }} />
                 {translate('pos.dashboard.welcome.aor_button')}
             </Button>
             <Button href="https://github.com/marmelab/react-admin">
-                <CodeIcon />
+                <CodeIcon style={{ paddingRight: '0.5em' }} />
                 {translate('pos.dashboard.welcome.demo_button')}
             </Button>
         </CardActions>

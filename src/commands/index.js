@@ -43,6 +43,7 @@ const CommandFilter = props => (
                 { id: 'ordered', name: 'ordered' },
                 { id: 'cancelled', name: 'cancelled' },
             ]}
+            elStyle={{ width: 150 }}
         />
         <DateInput source="date_gte" />
         <DateInput source="date_lte" />

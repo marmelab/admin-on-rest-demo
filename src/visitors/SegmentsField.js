@@ -11,9 +11,11 @@ const styles = {
 const SegmentsField = ({ record, translate }) => (
     <span style={styles.main}>
         {record.groups.map(segment => (
-            <Chip key={segment} style={styles.chip}>
-                {translate(segments.find(s => s.id === segment).name)}
-            </Chip>
+            <Chip
+                key={segment}
+                style={styles.chip}
+                label={translate(segments.find(s => s.id === segment).name)}
+            />
         ))}
     </span>
 );

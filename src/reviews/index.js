@@ -37,6 +37,7 @@ export const ReviewFilter = props => (
                 { id: 'pending', name: 'Pending' },
                 { id: 'rejected', name: 'Rejected' },
             ]}
+            elStyle={{ width: 150 }}
         />
         <ReferenceInput source="customer_id" reference="customers">
             <AutocompleteInput
