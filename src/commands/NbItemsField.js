@@ -1,5 +1,5 @@
 import React from 'react';
-import { FunctionField } from 'admin-on-rest';
+import { FunctionField } from 'react-admin';
 
 const render = record => record.basket.length;
 

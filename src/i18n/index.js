@@ -1,5 +1,5 @@
-import { englishMessages } from 'admin-on-rest';
-import frenchMessages from 'aor-language-french';
+import englishMessages from 'ra-language-english';
+import frenchMessages from 'ra-language-french';
 
 import customFrenchMessages from './fr';
 import customEnglishMessages from './en';

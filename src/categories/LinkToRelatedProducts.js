@@ -1,23 +1,39 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import { Link } from 'react-router-dom';
-import { translate } from 'admin-on-rest';
+import compose from 'recompose/compose';
+import Button from 'material-ui/Button';
+import { withStyles } from 'material-ui/styles';
+import { Link } from 'react-admin';
+import { translate } from 'react-admin';
 import { stringify } from 'query-string';
 
 import { ProductIcon } from '../products';
 
-const LinkToRelatedProducts = ({ record, translate }) => (
-    <FlatButton
-        primary
-        label={translate('resources.categories.fields.products')}
-        icon={<ProductIcon />}
-        containerElement={<Link
+const styles = {
+    icon: { paddingRight: '0.5em' },
+    link: {
+        display: 'inline-flex',
+        alignItems: 'center',
+    },
+};
+
+const LinkToRelatedProducts = ({ classes, record, translate }) => (
+    <Button color="primary">
+        <Link
             to={{
                 pathname: '/products',
-                search: stringify({ page: 1, perPage: 25, filter: JSON.stringify({ category_id: record.id }) }),
+                search: stringify({
+                    page: 1,
+                    perPage: 25,
+                    filter: JSON.stringify({ category_id: record.id }),
+                }),
             }}
-        />}
-    />
+            className={classes.link}
+        >
+            <ProductIcon className={classes.icon} />
+            {translate('resources.categories.fields.products')}
+        </Link>
+    </Button>
 );
 
-export default translate(LinkToRelatedProducts);
+const enhance = compose(withStyles(styles), translate);
+export default enhance(LinkToRelatedProducts);

@@ -1,29 +1,63 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import { translate, changeLocale as changeLocaleAction, ViewTitle } from 'admin-on-rest';
+import Card, { CardContent } from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import { translate, changeLocale, ViewTitle } from 'react-admin';
 
-import { changeTheme as changeThemeAction } from './actions';
+import { changeTheme } from './actions';
 
 const styles = {
     label: { width: '10em', display: 'inline-block' },
     button: { margin: '1em' },
 };
 
-const Configuration = ({ theme, locale, changeTheme, changeLocale, translate }) => (
+const Configuration = ({
+    theme,
+    locale,
+    changeTheme,
+    changeLocale,
+    translate,
+}) => (
     <Card>
         <ViewTitle title={translate('pos.configuration')} />
-        <CardText>
+        <CardContent>
             <div style={styles.label}>{translate('pos.theme.name')}</div>
-            <RaisedButton style={styles.button} label={translate('pos.theme.light')} primary onClick={() => changeTheme('light')} />
-            <RaisedButton style={styles.button} label={translate('pos.theme.dark')} secondary onClick={() => changeTheme('dark')} />
-        </CardText>
-        <CardText>
+            <Button
+                raised
+                style={styles.button}
+                color={theme === 'light' ? 'primary' : 'default'}
+                onClick={() => changeTheme('light')}
+            >
+                {translate('pos.theme.light')}
+            </Button>
+            <Button
+                raised
+                style={styles.button}
+                color={theme === 'dark' ? 'primary' : 'default'}
+                onClick={() => changeTheme('dark')}
+            >
+                {translate('pos.theme.dark')}
+            </Button>
+        </CardContent>
+        <CardContent>
             <div style={styles.label}>{translate('pos.language')}</div>
-            <RaisedButton style={styles.button} label="en" primary={locale === 'en'} onClick={() => changeLocale('en')} />
-            <RaisedButton style={styles.button} label="fr" primary={locale === 'fr'} onClick={() => changeLocale('fr')} />
-        </CardText>
+            <Button
+                raised
+                style={styles.button}
+                color={locale === 'en' ? 'primary' : 'default'}
+                onClick={() => changeLocale('en')}
+            >
+                en
+            </Button>
+            <Button
+                raised
+                style={styles.button}
+                color={locale === 'fr' ? 'primary' : 'default'}
+                onClick={() => changeLocale('fr')}
+            >
+                fr
+            </Button>
+        </CardContent>
     </Card>
 );
 
@@ -33,6 +67,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-    changeLocale: changeLocaleAction,
-    changeTheme: changeThemeAction,
+    changeLocale,
+    changeTheme,
 })(translate(Configuration));

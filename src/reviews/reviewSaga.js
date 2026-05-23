@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
-import { showNotification } from 'admin-on-rest';
+import { showNotification } from 'react-admin';
 import {
     REVIEW_APPROVE_SUCCESS,
     REVIEW_APPROVE_FAILURE,
